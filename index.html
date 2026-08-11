@@ -1,1074 +1,1360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Md. Ibrahim Zihad — A Portfolio, Bound</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    /* ---- token system ---- */
-    --leather-1:#5a2318;
-    --leather-2:#3a140d;
-    --leather-3:#7a3220;
-    --leather-shine: rgba(255,214,150,0.10);
-    --gold:#c6a15b;
-    --gold-bright:#f0d59a;
-    --gold-dim:#8a6d3a;
-    --paper:#f3ead1;
-    --paper-2:#eaddb8;
-    --paper-3:#dfcf9f;
-    --paper-shadow:#c9b689;
-    --ink:#3a2b1c;
-    --ink-soft:#6c5a42;
-    --ink-faint:#9c8a6c;
-    --wax:#7c1f1a;
-    --desk-1:#0e0a07;
-    --desk-2:#241810;
-    --desk-3:#140d08;
-    --font-display:'Cinzel', serif;
-    --font-title:'Cinzel Decorative', serif;
-    --font-body:'EB Garamond', serif;
-    --book-w:1020px;
-    --book-h:640px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md. Ibrahim Zihad — Full Stack Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: rgba(255,255,255,0.08);
+      --primary: #a78bfa;
+      --accent: #38bdf8;
+      --gold: #fbbf24;
+      --text: #e8e8f0;
+      --muted: #6b6b8a;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --glow: 0 0 40px rgba(167,139,250,0.18);
+    }
 
-  html,body{height:100%;}
-  body{
-    background: radial-gradient(ellipse 90% 70% at 50% 30%, var(--desk-2) 0%, var(--desk-1) 65%, #050403 100%);
-    font-family: var(--font-body);
-    color: var(--ink);
-    overflow:hidden;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
+    html { scroll-behavior: smooth; }
 
-  /* faint room vignette + grain */
-  .room{
-    position:fixed; inset:0;
-    background:
-      radial-gradient(ellipse 60% 45% at 50% 38%, rgba(255,196,120,0.10) 0%, transparent 60%),
-      radial-gradient(ellipse 120% 90% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 55%);
-    pointer-events:none;
-    z-index:1;
-    animation: flicker 9s ease-in-out infinite;
-  }
-  @keyframes flicker{
-    0%,100%{ opacity:1; }
-    45%{ opacity:0.92; }
-    50%{ opacity:1; }
-    78%{ opacity:0.95; }
-  }
-  .grain{
-    position:fixed; inset:0; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-  .stage{
-    position:relative;
-    z-index:3;
-    width:100vw; height:100vh;
-    display:flex; align-items:center; justify-content:center;
-  }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.5;
+    }
 
-  .scaler{
-    width:var(--book-w);
-    height:var(--book-h);
-    transform-origin:center center;
-    position:relative;
-  }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
 
-  .book-scene{
-    width:100%; height:100%;
-    position:relative;
-    perspective:2600px;
-    perspective-origin:50% 45%;
-  }
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s;
+    }
 
-  /* subtle desk shadow under the book */
-  .book-shadow{
-    position:absolute;
-    left:4%; right:4%; bottom:-26px; height:40px;
-    background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(0,0,0,0.55), transparent 75%);
-    filter: blur(4px);
-    z-index:0;
-  }
+    nav.scrolled { padding: 0.9rem 3rem; }
 
-  /* =========================================================
-     FRONT / BACK COVER SCREENS (closed book views)
-  ========================================================= */
-  .cover-screen, .backcover-screen{
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    transform-style:preserve-3d;
-    cursor:pointer;
-    transition: opacity .5s ease, transform .5s ease;
-  }
-  .cover-screen[hidden], .backcover-screen[hidden]{ display:none; }
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
 
-  .leather-panel{
-    position:relative;
-    width:74%; height:96%;
-    border-radius: 6px 14px 14px 6px;
-    background:
-      radial-gradient(120% 90% at 20% 10%, var(--leather-shine), transparent 45%),
-      repeating-linear-gradient(125deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 5px),
-      linear-gradient(155deg, var(--leather-3) 0%, var(--leather-1) 45%, var(--leather-2) 100%);
-    box-shadow:
-      inset 0 0 0 2px rgba(198,161,91,0.35),
-      inset 0 0 60px rgba(0,0,0,0.55),
-      0 30px 60px rgba(0,0,0,0.65);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:14px;
-    padding:40px;
-    text-align:center;
-  }
-  .leather-panel::before{
-    content:'';
-    position:absolute; inset:14px;
-    border:1px solid rgba(198,161,91,0.55);
-    border-radius:4px 10px 10px 4px;
-    pointer-events:none;
-  }
-  .leather-panel::after{
-    content:'';
-    position:absolute; inset:22px;
-    border:1px solid rgba(198,161,91,0.25);
-    border-radius:3px 8px 8px 3px;
-    pointer-events:none;
-  }
+    .logo span { color: var(--primary); }
 
-  .corner{
-    position:absolute; width:26px; height:26px;
-    border:2px solid var(--gold-dim);
-    opacity:0.75;
-  }
-  .corner.tl{ top:8px; left:8px; border-right:none; border-bottom:none; }
-  .corner.tr{ top:8px; right:8px; border-left:none; border-bottom:none; }
-  .corner.bl{ bottom:8px; left:8px; border-right:none; border-top:none; }
-  .corner.br{ bottom:8px; right:8px; border-left:none; border-top:none; }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
 
-  .ornament{ color:var(--gold); font-size:1.3rem; opacity:0.8; letter-spacing:0.3em; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
 
-  .cover-emblem{
-    width:74px; height:74px;
-    border-radius:50%;
-    border:2px solid var(--gold);
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-display);
-    font-weight:700;
-    letter-spacing:0.06em;
-    color:var(--gold-bright);
-    font-size:1.15rem;
-    box-shadow: inset 0 0 0 4px rgba(198,161,91,0.18), 0 0 22px rgba(198,161,91,0.15);
-  }
+    .nav-links a:hover { color: var(--primary); }
 
-  .cover-title{
-    font-family:var(--font-title);
-    color:var(--gold-bright);
-    font-size:clamp(1.9rem, 3.4vw, 2.7rem);
-    line-height:1.25;
-    text-shadow: 0 2px 0 rgba(0,0,0,0.4), 0 0 24px rgba(198,161,91,0.18);
-    letter-spacing:0.02em;
-  }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
 
-  .cover-rule{
-    display:flex; align-items:center; gap:12px;
-    color:var(--gold);
-    font-size:0.8rem;
-    width:60%;
-  }
-  .cover-rule span{ flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
 
-  .cover-role{
-    font-family:var(--font-display);
-    color:var(--gold);
-    letter-spacing:0.28em;
-    font-size:0.78rem;
-    text-transform:uppercase;
-  }
-  .cover-sub{
-    font-style:italic;
-    color:var(--ink-faint);
-    font-size:0.95rem;
-    opacity:0.85;
-  }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  .wax-seal{
-    position:absolute; bottom:34px; right:44px;
-    width:52px; height:52px; border-radius:50%;
-    background: radial-gradient(circle at 32% 28%, #a83a30, var(--wax) 60%, #5c1210 100%);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 0 8px rgba(0,0,0,0.5);
-    display:flex; align-items:center; justify-content:center;
-    font-family:var(--font-display);
-    font-size:0.62rem;
-    font-weight:700;
-    color:rgba(255,230,200,0.85);
-    letter-spacing:0.05em;
-    transform:rotate(-8deg);
-  }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
 
-  .open-hint{
-    margin-top:6px;
-    font-family:var(--font-display);
-    font-size:0.72rem;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:var(--gold-bright);
-    opacity:0.8;
-    animation: pulseHint 2.4s ease-in-out infinite;
-  }
-  @keyframes pulseHint{
-    0%,100%{ opacity:0.5; transform:translateY(0); }
-    50%{ opacity:1; transform:translateY(-3px); }
-  }
+    .mobile-menu.open { display: flex; }
 
-  .restart-btn{
-    margin-top:8px;
-    font-family:var(--font-display);
-    font-size:0.72rem;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--leather-1);
-    background:var(--gold-bright);
-    border:none;
-    padding:10px 22px;
-    border-radius:100px;
-    cursor:pointer;
-    box-shadow:0 6px 16px rgba(0,0,0,0.4);
-    transition: transform .2s ease, box-shadow .2s ease;
-  }
-  .restart-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.5); }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
 
-  /* =========================================================
-     OPEN SPREAD
-  ========================================================= */
-  .book-spread{
-    position:absolute; inset:0;
-    transform-style:preserve-3d;
-    display:none;
-  }
-  .book-spread.active{ display:block; }
+    .mobile-menu a:hover { color: var(--primary); }
 
-  .spine{
-    position:absolute; left:50%; top:1%; bottom:1%;
-    width:34px; margin-left:-17px;
-    background:
-      linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 20%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.5) 100%),
-      linear-gradient(180deg, var(--leather-3), var(--leather-1) 50%, var(--leather-2));
-    z-index:60;
-    box-shadow: 0 0 30px rgba(0,0,0,0.6);
-    border-radius:2px;
-  }
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-  /* decorative stacked-paper edges for depth */
-  .stack-edge{
-    position:absolute; top:2%; bottom:2%; width:46%;
-    z-index:1;
-    border-radius:2px;
-    pointer-events:none;
-  }
-  .stack-edge.right{
-    right:0.6%;
-    background: repeating-linear-gradient(90deg, var(--paper-2) 0 2px, var(--paper-3) 2px 3px);
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.35);
-  }
-  .stack-edge.left{
-    left:0.6%;
-    background: repeating-linear-gradient(90deg, var(--paper-3) 0 2px, var(--paper-2) 2px 3px);
-    box-shadow: -2px 2px 10px rgba(0,0,0,0.35);
-  }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(167,139,250,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(56,189,248,0.08) 0%, transparent 60%);
+    }
 
-  .leaf{
-    position:absolute; top:2%; bottom:2%; right:0.6%;
-    width:46%;
-    transform-style:preserve-3d;
-    transform-origin:left center;
-    transform:rotateY(0deg);
-    transition:transform 1.05s cubic-bezier(.45,.05,.2,1);
-    border-radius:2px;
-  }
-  .leaf.flipped{ transform:rotateY(-180deg); }
-  .leaf.no-anim{ transition:none; }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
 
-  .face{
-    position:absolute; inset:0;
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
-    overflow:hidden;
-    border-radius:2px;
-    box-shadow: 0 2px 18px rgba(0,0,0,0.35);
-  }
-  .face.back{ transform:rotateY(180deg); }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-  .face.paper{
-    background:
-      radial-gradient(140% 100% at 0% 0%, rgba(255,255,255,0.25), transparent 40%),
-      linear-gradient(120deg, var(--paper) 0%, var(--paper-2) 100%);
-  }
-  .face.paper::before{
-    content:'';
-    position:absolute; inset:0;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-    opacity:0.05;
-    mix-blend-mode:multiply;
-    pointer-events:none;
-  }
-  .face.paper.front{ box-shadow: inset 12px 0 24px -18px rgba(0,0,0,0.35), 0 2px 18px rgba(0,0,0,0.35); }
-  .face.paper.back{ box-shadow: inset -12px 0 24px -18px rgba(0,0,0,0.35), 0 2px 18px rgba(0,0,0,0.35); }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
 
-  .face.leather{
-    background:
-      radial-gradient(120% 90% at 15% 10%, var(--leather-shine), transparent 45%),
-      repeating-linear-gradient(125deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 5px),
-      linear-gradient(155deg, var(--leather-3) 0%, var(--leather-1) 45%, var(--leather-2) 100%);
-  }
+    .hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: pulse 2s infinite;
+    }
 
-  .page-pad{
-    position:relative; z-index:2;
-    height:100%; width:100%;
-    padding:34px 34px 44px;
-    display:flex; flex-direction:column;
-    overflow-y:auto;
-  }
-  .page-pad::-webkit-scrollbar{ width:6px; }
-  .page-pad::-webkit-scrollbar-thumb{ background:var(--gold-dim); border-radius:4px; }
-  .page-pad::-webkit-scrollbar-track{ background:transparent; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
 
-  .running-head{
-    font-family:var(--font-display);
-    font-size:0.62rem;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--ink-faint);
-    text-align:center;
-    margin-bottom:14px;
-    opacity:0.7;
-  }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
 
-  .eyebrow{
-    font-family:var(--font-display);
-    font-size:0.68rem;
-    letter-spacing:0.24em;
-    text-transform:uppercase;
-    color:var(--wax);
-    display:block;
-    margin-bottom:6px;
-  }
-  .page-title{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:1.55rem;
-    color:var(--ink);
-    margin-bottom:6px;
-    letter-spacing:0.01em;
-  }
-  .page-divider{
-    display:flex; align-items:center; gap:8px;
-    color:var(--gold-dim);
-    font-size:0.75rem;
-    margin-bottom:16px;
-  }
-  .page-divider span{ flex:1; height:1px; background:linear-gradient(90deg, var(--gold-dim), transparent); }
+    .hero-name .line2 {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    }
 
-  .page-body{ flex:1; font-size:0.92rem; line-height:1.75; color:var(--ink-soft); }
-  .page-body p{ margin-bottom:12px; }
-  .page-body p:first-of-type::first-letter{
-    font-family:var(--font-title);
-    font-size:2.6rem;
-    float:left;
-    line-height:0.8;
-    padding:4px 8px 0 0;
-    color:var(--wax);
-  }
+    .hero-role {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
 
-  .margin-note{
-    display:inline-block;
-    font-family:var(--font-body);
-    font-style:italic;
-    font-size:0.8rem;
-    color:var(--wax);
-    border:1px dashed rgba(124,31,26,0.35);
-    padding:5px 10px;
-    border-radius:2px;
-    transform:rotate(-1.4deg);
-    background:rgba(124,31,26,0.04);
-    margin:6px 0 14px;
-  }
+    .hero-desc {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
 
-  .page-number{
-    text-align:center;
-    font-family:var(--font-display);
-    font-size:0.7rem;
-    color:var(--ink-faint);
-    margin-top:10px;
-    letter-spacing:0.08em;
-  }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
 
-  /* TOC */
-  .toc-list{ list-style:none; margin-top:6px; }
-  .toc-list li{
-    display:flex; align-items:baseline; gap:8px;
-    font-size:0.9rem;
-    color:var(--ink-soft);
-    padding:7px 0;
-    border-bottom:1px dotted rgba(108,90,66,0.3);
-  }
-  .toc-num{ font-family:var(--font-display); color:var(--wax); font-size:0.82rem; width:22px; }
-  .toc-title{ font-weight:500; color:var(--ink); }
-  .toc-leader{ flex:1; border-bottom:1px dotted var(--ink-faint); transform:translateY(-4px); }
-  .toc-page{ font-family:var(--font-display); font-size:0.8rem; color:var(--ink-faint); }
-  .toc-note{ margin-top:16px; font-style:italic; color:var(--ink-faint); font-size:0.82rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
 
-  /* Education / Experience journal entries */
-  .entry{
-    padding:12px 0 12px 16px;
-    border-left:2px solid var(--gold-dim);
-    margin-bottom:14px;
-    position:relative;
-  }
-  .entry::before{
-    content:'';
-    position:absolute; left:-5px; top:16px;
-    width:8px; height:8px; border-radius:50%;
-    background:var(--wax);
-  }
-  .entry-title{ font-family:var(--font-display); font-weight:600; font-size:0.98rem; color:var(--ink); }
-  .entry-org{ font-style:italic; color:var(--wax); font-size:0.85rem; margin:2px 0 4px; }
-  .entry-meta{ font-size:0.8rem; color:var(--ink-faint); }
-  .entry ul{ margin:8px 0 0 18px; font-size:0.85rem; color:var(--ink-soft); }
-  .entry ul li{ margin-bottom:5px; }
+    .btn-primary {
+      background: var(--primary);
+      color: #0a0a0f;
+    }
 
-  /* skills */
-  .skill-group{ margin-bottom:16px; }
-  .skill-group h4{
-    font-family:var(--font-display); font-size:0.85rem; letter-spacing:0.06em;
-    color:var(--wax); margin-bottom:8px; text-transform:uppercase;
-  }
-  .skill-chips{ display:flex; flex-wrap:wrap; gap:7px; }
-  .chip{
-    font-size:0.78rem;
-    padding:4px 11px;
-    border:1px solid var(--gold-dim);
-    border-radius:100px;
-    color:var(--ink-soft);
-    background:rgba(198,161,91,0.08);
-  }
+    .btn-primary:hover {
+      background: #c4b5fd;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(167,139,250,0.35);
+    }
 
-  /* projects */
-  .proj{ margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid rgba(108,90,66,0.2); }
-  .proj:last-child{ border-bottom:none; }
-  .proj-name{ font-family:var(--font-display); font-weight:600; color:var(--ink); font-size:1rem; }
-  .proj-tag{ font-size:0.72rem; color:var(--wax); text-transform:uppercase; letter-spacing:0.06em; }
-  .proj-desc{ font-size:0.84rem; color:var(--ink-soft); margin:5px 0 7px; line-height:1.65; }
-  .proj-stack{ display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px; }
-  .proj-stack span{ font-size:0.68rem; color:var(--ink-faint); border:1px solid rgba(108,90,66,0.3); padding:2px 7px; border-radius:4px; }
-  .proj-link{ font-size:0.78rem; color:var(--wax); text-decoration:none; font-weight:600; }
-  .proj-link:hover{ text-decoration:underline; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
 
-  /* achievements/certs */
-  .cred{ margin-bottom:14px; }
-  .cred-title{ font-family:var(--font-display); font-weight:600; font-size:0.92rem; color:var(--ink); }
-  .cred-sub{ font-style:italic; color:var(--wax); font-size:0.8rem; margin:2px 0 4px; }
-  .cred-desc{ font-size:0.82rem; color:var(--ink-soft); line-height:1.6; }
-  .badge{
-    display:inline-block; margin-top:5px; font-size:0.7rem;
-    color:var(--wax); border:1px solid var(--wax); padding:2px 9px; border-radius:100px;
-  }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
 
-  /* contact */
-  .contact-list{ display:flex; flex-direction:column; gap:11px; margin-bottom:16px; }
-  .contact-row{ display:flex; gap:10px; align-items:baseline; font-size:0.88rem; }
-  .contact-row .lbl{ font-family:var(--font-display); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--wax); width:78px; flex-shrink:0; }
-  .contact-row a{ color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--ink-faint); }
-  .contact-row a:hover{ color:var(--wax); }
-  .seal-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
-  .seal-btn{
-    font-family:var(--font-display); font-size:0.7rem; letter-spacing:0.06em;
-    color:var(--paper); background:var(--leather-1); border:1px solid var(--gold-dim);
-    padding:8px 15px; border-radius:100px; text-decoration:none;
-    transition:transform .2s ease, background .2s ease;
-  }
-  .seal-btn:hover{ transform:translateY(-2px); background:var(--leather-3); }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.8s 0.5s ease both;
+      flex-wrap: wrap;
+    }
 
-  /* colophon */
-  .colophon{ text-align:center; margin-top:auto; margin-bottom:auto; }
-  .colophon .mark{ font-size:1.8rem; color:var(--gold-dim); margin-bottom:10px; }
-  .colophon p{ font-size:0.82rem; font-style:italic; color:var(--ink-soft); margin-bottom:8px; }
-  .colophon .small{ font-size:0.72rem; color:var(--ink-faint); margin-top:14px; }
+    .hero-stat .num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text);
+    }
 
-  /* =========================================================
-     NAV: arrows, tabs, progress
-  ========================================================= */
-  .nav-arrow{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:46px; height:46px; border-radius:50%;
-    background:rgba(20,13,8,0.55);
-    border:1px solid var(--gold-dim);
-    color:var(--gold-bright);
-    display:flex; align-items:center; justify-content:center;
-    font-size:1.2rem;
-    cursor:pointer;
-    z-index:80;
-    transition: background .2s ease, transform .2s ease;
-    backdrop-filter: blur(3px);
-  }
-  .nav-arrow:hover{ background:rgba(198,161,91,0.25); }
-  .nav-arrow.prev{ left:-64px; }
-  .nav-arrow.next{ right:-64px; }
-  .nav-arrow[disabled]{ opacity:0.25; cursor:default; pointer-events:none; }
+    .hero-stat .num span { color: var(--primary); }
+    .hero-stat .label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
-  .progress{
-    position:absolute; left:50%; bottom:-38px; transform:translateX(-50%);
-    font-family:var(--font-display);
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--gold-dim);
-    z-index:80;
-    white-space:nowrap;
-  }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  .tabs{
-    position:absolute; right:-13px; top:8%;
-    display:flex; flex-direction:column; gap:7px;
-    z-index:85;
-  }
-  .tab{
-    font-family:var(--font-display);
-    font-size:0.6rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--paper);
-    background:var(--wax);
-    padding:7px 5px;
-    writing-mode:vertical-rl;
-    border-radius:0 4px 4px 0;
-    cursor:pointer;
-    box-shadow:2px 2px 6px rgba(0,0,0,0.4);
-    opacity:0.88;
-    transition: opacity .2s ease, transform .2s ease;
-  }
-  .tab:hover{ opacity:1; transform:translateX(3px); }
-  .tab.current{ background:var(--gold); color:var(--leather-2); opacity:1; }
+    /* SECTIONS */
+    section { padding: 7rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
 
-  .hint-row{
-    position:absolute; left:50%; bottom:-62px; transform:translateX(-50%);
-    font-size:0.72rem; color:rgba(240,213,154,0.55);
-    font-family:var(--font-body); font-style:italic;
-    white-space:nowrap;
-  }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
 
-  @media (max-width:760px){
-    .nav-arrow.prev{ left:-8px; }
-    .nav-arrow.next{ right:-8px; }
-    .tabs{ display:none; }
-  }
-</style>
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      font-weight: 300;
+      margin-bottom: 4rem;
+    }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-stats-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .stat-card:hover { border-color: rgba(167,139,250,0.4); }
+    .stat-card:first-child { grid-column: span 2; }
+
+    .stat-card .n {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .stat-card .l {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* EDUCATION */
+    #education { background: var(--bg); }
+    .edu-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .edu-card:hover { border-color: rgba(167,139,250,0.3); box-shadow: var(--glow); }
+    .edu-card:hover::before { opacity: 1; }
+
+    .edu-degree {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .edu-school { color: var(--primary); font-size: 0.9rem; font-weight: 500; margin-bottom: 0.5rem; }
+    .edu-detail { color: var(--muted); font-size: 0.875rem; }
+    .edu-year {
+      background: rgba(167,139,250,0.12);
+      color: var(--primary);
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* SKILLS */
+    #skills { background: var(--surface); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .skill-card:hover { border-color: rgba(167,139,250,0.3); box-shadow: var(--glow); }
+    .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+    .skill-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+    .tag {
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.2);
+      color: var(--primary);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .tag:hover { background: rgba(167,139,250,0.2); border-color: var(--primary); }
+
+    .tag.accent {
+      background: rgba(56,189,248,0.1);
+      border-color: rgba(56,189,248,0.2);
+      color: var(--accent);
+    }
+
+    .tag.accent:hover { background: rgba(56,189,248,0.2); border-color: var(--accent); }
+
+    /* EXPERIENCE */
+    #experience { background: var(--bg); }
+
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .exp-card:hover { border-color: rgba(167,139,250,0.3); box-shadow: var(--glow); }
+    .exp-card:hover::before { opacity: 1; }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .exp-badge {
+      background: rgba(167,139,250,0.12);
+      color: var(--primary);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .exp-org { color: var(--primary); font-size: 0.9rem; font-weight: 500; margin-bottom: 1rem; }
+
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .exp-bullets li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+
+    /* PROJECTS */
+    #projects { background: var(--surface); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.35s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: rgba(167,139,250,0.35);
+      box-shadow: var(--glow);
+      transform: translateY(-6px);
+    }
+
+    .project-top {
+      padding: 2.5rem;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-top::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.15) 0%, transparent 70%);
+      top: -50px; right: -50px;
+    }
+
+    .project-label {
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .project-body {
+      padding: 2rem 2.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+      font-weight: 300;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+
+    .stack-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.78rem;
+    }
+
+    .project-links { display: flex; gap: 1rem; }
+
+    .project-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .project-link:hover { color: var(--accent); }
+
+    /* AI badge on project */
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(251,191,36,0.1);
+      border: 1px solid rgba(251,191,36,0.25);
+      color: var(--gold);
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+      letter-spacing: 0.04em;
+    }
+
+    /* CERTIFICATIONS */
+    #certifications { background: var(--bg); }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card::after {
+      content: '';
+      position: absolute;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%);
+      bottom: -20px; right: -20px;
+    }
+
+    .cert-card:hover { border-color: rgba(167,139,250,0.35); box-shadow: var(--glow); }
+
+    .cert-icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
+
+    .cert-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .cert-issuer { color: var(--primary); font-size: 0.85rem; font-weight: 500; margin-bottom: 0.75rem; }
+    .cert-desc { color: var(--muted); font-size: 0.85rem; line-height: 1.7; font-weight: 300; }
+
+    .cert-badge {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .cert-badge.done {
+      background: rgba(56,189,248,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.25);
+    }
+
+    .cert-badge.ongoing {
+      background: rgba(251,191,36,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(251,191,36,0.25);
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements { background: var(--surface); }
+
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .achieve-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .achieve-card::after {
+      content: '';
+      position: absolute;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251,191,36,0.1) 0%, transparent 70%);
+      bottom: -20px; right: -20px;
+    }
+
+    .achieve-card:hover { border-color: rgba(251,191,36,0.3); box-shadow: 0 0 40px rgba(251,191,36,0.08); }
+
+    .achieve-icon { font-size: 2.5rem; margin-bottom: 1.25rem; }
+
+    .achieve-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .achieve-desc { color: var(--muted); font-size: 0.875rem; line-height: 1.7; font-weight: 300; }
+
+    .achieve-badge {
+      display: inline-block;
+      background: rgba(251,191,36,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(251,191,36,0.25);
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--bg); }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-left p {
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .social-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(167,139,250,0.08);
+      transform: translateY(-2px);
+    }
+
+    .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(167,139,250,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
+    .contact-item-value { font-weight: 500; }
+    .contact-item-value a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .contact-item-value a:hover { color: var(--primary); }
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    footer p { color: var(--muted); font-size: 0.875rem; }
+    footer span { color: var(--primary); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      nav.scrolled { padding: 0.8rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-stats-block { grid-template-columns: 1fr 1fr; }
+      .about-stats-block .stat-card:first-child { grid-column: span 2; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem; }
+      section { padding: 5rem 1.25rem; }
+      .hero { padding: 7rem 1.25rem 4rem; }
+      .hero-stats { gap: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .achieve-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .edu-card { grid-template-columns: 1fr; }
+      .about-stats-block { grid-template-columns: 1fr; }
+      .about-stats-block .stat-card:first-child { grid-column: span 1; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="room"></div>
-<div class="grain"></div>
+<nav id="nav">
+  <div class="logo">MIZ<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-<div class="stage" id="stage">
-  <div class="scaler" id="scaler">
-    <div class="book-scene">
-      <div class="book-shadow"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mm-link">About</a>
+  <a href="#education" class="mm-link">Education</a>
+  <a href="#skills" class="mm-link">Skills</a>
+  <a href="#experience" class="mm-link">Experience</a>
+  <a href="#projects" class="mm-link">Projects</a>
+  <a href="#certifications" class="mm-link">Certs</a>
+  <a href="#achievements" class="mm-link">Achievements</a>
+  <a href="#contact" class="mm-link">Contact</a>
+</div>
 
-      <!-- CLOSED: FRONT COVER -->
-      <div class="cover-screen" id="coverScreen">
-        <div class="leather-panel">
-          <span class="corner tl"></span><span class="corner tr"></span>
-          <span class="corner bl"></span><span class="corner br"></span>
-          <div class="ornament">❦</div>
-          <div class="cover-emblem">MIZ</div>
-          <h1 class="cover-title">Md. Ibrahim<br>Zihad</h1>
-          <div class="cover-rule"><span></span>◆<span></span></div>
-          <p class="cover-role">Full&nbsp;Stack&nbsp;Developer</p>
-          <p class="cover-sub">A Portfolio, Bound</p>
-          <div class="wax-seal">MIZ</div>
-          <div class="open-hint">Click to Open</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Available for opportunities</div>
+    <h1 class="hero-name">
+      <div>Md. Ibrahim</div>
+      <div class="line2">Zihad</div>
+    </h1>
+    <div class="hero-role">Full Stack Developer</div>
+    <p class="hero-desc">
+      Building scalable web applications across the full stack. Passionate about clean code, real-world impact, and AI-integrated systems. Final semester CSE student at UIU.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">3.93<span>/4</span></div>
+        <div class="label">CGPA</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">126<span>+</span></div>
+        <div class="label">Credits Done</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">4</div>
+        <div class="label">Projects Built</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">5<span>.0</span></div>
+        <div class="label">HSC & SSC GPA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">About</p>
+        <h2 class="section-title">Who I Am</h2>
+        <p>I'm <strong>Md. Ibrahim Zihad</strong>, a full stack developer and final-semester CSE undergraduate at <strong>United International University</strong>, Dhaka. I build meaningful web products that solve real problems.</p>
+        <p>My stack spans modern frontend with <strong>React.js</strong> and <strong>Next.js</strong>, backend APIs using <strong>Express.js</strong>, and databases like <strong>MySQL</strong> and <strong>MongoDB</strong>. I'm also passionate about integrating AI — from computer vision to LLMs — into practical applications.</p>
+        <p>With a strong academic record and real freelance experience, I'm eager to contribute to a team that values craft, curiosity, and impact.</p>
+      </div>
+      <div class="about-stats-block reveal">
+        <div class="stat-card">
+          <div class="n">3.93</div>
+          <div class="l">Current CGPA — BSCSE</div>
+        </div>
+        <div class="stat-card">
+          <div class="n">126</div>
+          <div class="l">Credits Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="n">4</div>
+          <div class="l">Projects Built</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-label reveal">Education</p>
+    <h2 class="section-title reveal">Academic Background</h2>
+    <p class="section-sub reveal">A consistent record of excellence from school through university.</p>
+    <div class="edu-list">
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-degree">BSc in Computer Science & Engineering</div>
+          <div class="edu-school">United International University, Dhaka</div>
+          <div class="edu-detail">CGPA: 3.93 / 4.00 </div>
+        </div>
+        <div class="edu-year">2022 – 2026</div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+          <div class="edu-school">Birshrestha Noor Muhammad Public College</div>
+          <div class="edu-detail">GPA: 5.00 / 5.00</div>
+        </div>
+        <div class="edu-year">2022</div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-degree">Secondary School Certificate (SSC)</div>
+          <div class="edu-school">Ghatail Cantonment Public School and College</div>
+          <div class="edu-detail">GPA: 5.00 / 5.00</div>
+        </div>
+        <div class="edu-year">2018</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label reveal">Expertise</p>
+    <h2 class="section-title reveal">Tech Stack & Tools</h2>
+    <p class="section-sub reveal">Technologies I use across the full stack.</p>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🖥️</div>
+        <div class="skill-title">Frontend Development</div>
+        <div class="tags">
+          <span class="tag">React.js</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-title">Backend Development</div>
+        <div class="tags">
+          <span class="tag">Express.js</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-title">Databases & ORMs</div>
+        <div class="tags">
+          <span class="tag accent">MySQL</span>
+          <span class="tag accent">MongoDB</span>
+          <span class="tag accent">Sequelize ORM</span>
+          <span class="tag accent">Git</span>
+          <span class="tag accent">GitHub</span>
+          <span class="tag accent">Docker</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-title">AI & Domains</div>
+        <div class="tags">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">NLP</span>
+          <span class="tag">LLM Integration</span>
+          <span class="tag">Full Stack Web Dev</span>
+          <span class="tag">REST API Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label reveal">Work</p>
+    <h2 class="section-title reveal">Experience</h2>
+    <p class="section-sub reveal">Real-world work beyond the classroom.</p>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div class="exp-title">Freelance Web Developer</div>
+          <div class="exp-badge">2024 – Present</div>
+        </div>
+        <div class="exp-org">Self-Employed · Remote</div>
+        <ul class="exp-bullets">
+          <li>Designed and developed <strong>SubscriptionsBD</strong> — a full-stack web platform for selling and managing digital subscriptions — for a real client.</li>
+          <li>Handled the entire product lifecycle independently: frontend UX with Next.js & Tailwind CSS, REST backend with Express.js, and database design with MongoDB.</li>
+          <li>Delivered a type-safe, production-ready system with subscription purchase flows, user management, and order tracking.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label reveal">Portfolio</p>
+    <h2 class="section-title reveal">Featured Projects</h2>
+    <p class="section-sub reveal">Selected work showcasing full stack and AI capabilities.</p>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-label">Subscription Platform · Freelance</div>
+          <div class="project-name">SubscriptionsBD</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">A full-stack web platform for selling and managing digital subscriptions, built for a real client. Features smooth subscription purchase flows, user management, and order tracking — all with a type-safe architecture end-to-end.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">Tailwind CSS</span>
+            <span class="stack-tag">Express.js</span>
+            <span class="stack-tag">MongoDB</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/IbrahimZihad/Subscription-seller" target="_blank" class="project-link">↗ GitHub</a>
+          </div>
         </div>
       </div>
 
-      <!-- OPEN SPREAD -->
-      <div class="book-spread" id="bookSpread">
-        <div class="spine"></div>
-        <div class="stack-edge left"></div>
-        <div class="stack-edge right"></div>
-
-        <!-- Leaf 0 : Cover / Table of Contents -->
-        <div class="leaf" id="leaf0" data-index="0">
-          <div class="face front leather">
-            <span class="corner tl"></span><span class="corner tr"></span>
-            <span class="corner bl"></span><span class="corner br"></span>
-            <div class="page-pad" style="align-items:center;justify-content:center;text-align:center;">
-              <div class="ornament">❦</div>
-              <div class="cover-emblem" style="margin:14px auto;">MIZ</div>
-              <h1 class="cover-title" style="font-size:1.5rem;">Md. Ibrahim Zihad</h1>
-              <p class="cover-role" style="margin-top:8px;">Full Stack Developer</p>
-            </div>
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-label">Online Travel Agency</div>
+          <div class="project-name">Pothik</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">An OTA platform empowering users to independently plan and customize their dream tour itineraries from end to end — fully self-service, no travel agent required. Responsive and live in production.</p>
+          <div class="project-stack">
+            <span class="stack-tag">React.js</span>
+            <span class="stack-tag">Vite</span>
+            <span class="stack-tag">Tailwind CSS</span>
+            <span class="stack-tag">Express.js</span>
+            <span class="stack-tag">Node.js</span>
           </div>
-          <div class="face back paper">
-            <div class="page-pad">
-              <div class="running-head">Md. Ibrahim Zihad — Portfolio</div>
-              <span class="eyebrow">Contents</span>
-              <h2 class="page-title">Table of Contents</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <ul class="toc-list">
-                <li><span class="toc-num">I.</span><span class="toc-title">About the Author</span><span class="toc-leader"></span><span class="toc-page">3</span></li>
-                <li><span class="toc-num">II.</span><span class="toc-title">Education</span><span class="toc-leader"></span><span class="toc-page">4</span></li>
-                <li><span class="toc-num">III.</span><span class="toc-title">Skills &amp; Instruments</span><span class="toc-leader"></span><span class="toc-page">5</span></li>
-                <li><span class="toc-num">IV.</span><span class="toc-title">Experience</span><span class="toc-leader"></span><span class="toc-page">6</span></li>
-                <li><span class="toc-num">V.</span><span class="toc-title">Projects</span><span class="toc-leader"></span><span class="toc-page">7</span></li>
-                <li><span class="toc-num">VI.</span><span class="toc-title">Certifications</span><span class="toc-leader"></span><span class="toc-page">8</span></li>
-                <li><span class="toc-num">VII.</span><span class="toc-title">Achievements</span><span class="toc-leader"></span><span class="toc-page">9</span></li>
-                <li><span class="toc-num">VIII.</span><span class="toc-title">Correspondence</span><span class="toc-leader"></span><span class="toc-page">10</span></li>
-              </ul>
-              <p class="toc-note">Being a true and faithful account of one developer's work.</p>
-              <div class="page-number">ii</div>
-            </div>
+          <div class="project-links">
+            <a href="https://pothik-six.vercel.app" target="_blank" class="project-link">↗ Live Demo</a>
           </div>
         </div>
-
-        <!-- Leaf 1 : About / Education -->
-        <div class="leaf" id="leaf1" data-index="1">
-          <div class="face front paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter I</div>
-              <span class="eyebrow">Chapter I</span>
-              <h2 class="page-title">About the Author</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <p>I am a full stack developer and final-semester Computer Science &amp; Engineering undergraduate at United International University, Dhaka. I build meaningful web products that solve real problems.</p>
-                <p>My craft spans modern frontend work with React.js and Next.js, backend APIs built with Express.js, and databases such as MySQL and MongoDB. I hold a particular fondness for weaving AI — from computer vision to language models — into practical, working applications.</p>
-                <span class="margin-note">✎ CGPA 3.94 / 4.00</span>
-                <p>With a strong academic record and genuine freelance experience behind me, I remain eager to join a team that values craft, curiosity, and impact in equal measure.</p>
-              </div>
-              <div class="page-number">3</div>
-            </div>
-          </div>
-          <div class="face back paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter II</div>
-              <span class="eyebrow">Chapter II</span>
-              <h2 class="page-title">Education</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="entry">
-                  <div class="entry-title">BSc in Computer Science &amp; Engineering</div>
-                  <div class="entry-org">United International University, Dhaka</div>
-                  <div class="entry-meta">CGPA 3.94 / 4.00 · 126 Credits Completed · Final Semester · 2022 – Present</div>
-                </div>
-                <div class="entry">
-                  <div class="entry-title">Higher Secondary Certificate (HSC)</div>
-                  <div class="entry-org">Birshrestha Noor Muhammad Public College</div>
-                  <div class="entry-meta">GPA 5.00 / 5.00 · 2022</div>
-                </div>
-                <div class="entry">
-                  <div class="entry-title">Secondary School Certificate (SSC)</div>
-                  <div class="entry-org">Ghatail Cantonment Public School and College</div>
-                  <div class="entry-meta">GPA 5.00 / 5.00 · 2018</div>
-                </div>
-              </div>
-              <div class="page-number">4</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Leaf 2 : Skills / Experience -->
-        <div class="leaf" id="leaf2" data-index="2">
-          <div class="face front paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter III</div>
-              <span class="eyebrow">Chapter III</span>
-              <h2 class="page-title">Skills &amp; Instruments</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="skill-group">
-                  <h4>Frontend Development</h4>
-                  <div class="skill-chips">
-                    <span class="chip">React.js</span><span class="chip">Next.js</span><span class="chip">JavaScript</span>
-                    <span class="chip">TypeScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span>
-                  </div>
-                </div>
-                <div class="skill-group">
-                  <h4>Backend Development</h4>
-                  <div class="skill-chips">
-                    <span class="chip">Express.js</span><span class="chip">Node.js</span><span class="chip">Java</span>
-                    <span class="chip">Python</span><span class="chip">C++</span>
-                  </div>
-                </div>
-                <div class="skill-group">
-                  <h4>Databases &amp; Tools</h4>
-                  <div class="skill-chips">
-                    <span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Sequelize ORM</span>
-                    <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Docker</span>
-                  </div>
-                </div>
-                <div class="skill-group">
-                  <h4>AI &amp; Domains</h4>
-                  <div class="skill-chips">
-                    <span class="chip">Computer Vision</span><span class="chip">NLP</span><span class="chip">LLM Integration</span>
-                    <span class="chip">REST API Design</span>
-                  </div>
-                </div>
-              </div>
-              <div class="page-number">5</div>
-            </div>
-          </div>
-          <div class="face back paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter IV</div>
-              <span class="eyebrow">Chapter IV</span>
-              <h2 class="page-title">Experience</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="entry">
-                  <div class="entry-title">Freelance Web Developer</div>
-                  <div class="entry-org">Self-Employed · Remote</div>
-                  <div class="entry-meta">2024 – Present</div>
-                  <ul>
-                    <li>Designed and developed SubscriptionsBD — a full-stack platform for selling and managing digital subscriptions — for a real client.</li>
-                    <li>Handled the entire product lifecycle independently: frontend UX with Next.js &amp; Tailwind CSS, a REST backend with Express.js, and database design with MongoDB.</li>
-                    <li>Delivered a type-safe, production-ready system with purchase flows, user management, and order tracking.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="page-number">6</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Leaf 3 : Projects / Certifications -->
-        <div class="leaf" id="leaf3" data-index="3">
-          <div class="face front paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter V</div>
-              <span class="eyebrow">Chapter V</span>
-              <h2 class="page-title">Projects</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="proj">
-                  <div class="proj-tag">Subscription Platform · Freelance</div>
-                  <div class="proj-name">SubscriptionsBD</div>
-                  <p class="proj-desc">A full-stack platform for selling and managing digital subscriptions, built for a real client — with purchase flows, user management and order tracking, end to end.</p>
-                  <div class="proj-stack"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Express.js</span><span>MongoDB</span></div>
-                  <a class="proj-link" href="https://github.com/IbrahimZihad/Subscription-seller" target="_blank">↗ GitHub</a>
-                </div>
-                <div class="proj">
-                  <div class="proj-tag">Online Travel Agency</div>
-                  <div class="proj-name">Pothik</div>
-                  <p class="proj-desc">An OTA platform empowering users to independently plan and customize their dream tour itineraries — fully self-service, no travel agent required.</p>
-                  <div class="proj-stack"><span>React.js</span><span>Vite</span><span>Tailwind</span><span>Express.js</span><span>Node.js</span></div>
-                  <a class="proj-link" href="https://pothik-six.vercel.app" target="_blank">↗ Live Demo</a>
-                </div>
-                <div class="proj">
-                  <div class="proj-tag">AI-Powered System</div>
-                  <div class="proj-name">SmartLibrary</div>
-                  <p class="proj-desc">An autonomous library system inspired by Amazon Go — students borrow and return books without human interaction, with AI tracking items and triggering fines in real time.</p>
-                  <div class="proj-stack"><span>Python</span><span>Computer Vision</span><span>PHP</span><span>JavaScript</span></div>
-                  <a class="proj-link" href="https://github.com/IbrahimZihad/SmartLibrary" target="_blank">↗ GitHub</a>
-                </div>
-              </div>
-              <div class="page-number">7</div>
-            </div>
-          </div>
-          <div class="face back paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter VI</div>
-              <span class="eyebrow">Chapter VI</span>
-              <h2 class="page-title">Certifications</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="cred">
-                  <div class="cred-title">Frontend Mastery with JavaScript, React &amp; Next.js (TypeScript)</div>
-                  <div class="cred-sub">CDIP — United International University</div>
-                  <div class="cred-desc">A 36-hour intensive training program covering modern frontend development with JavaScript, React, and Next.js using TypeScript.</div>
-                  <span class="badge">Completed · Dec 2025</span>
-                </div>
-                <div class="cred">
-                  <div class="cred-title">Full Stack Web Development with Python, Django, React &amp; AI</div>
-                  <div class="cred-sub">Ostad.app</div>
-                  <div class="cred-desc">A comprehensive full-stack course covering Python, Django, React, and AI integration for production-grade web applications.</div>
-                  <span class="badge">In Progress</span>
-                </div>
-              </div>
-              <div class="page-number">8</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Leaf 4 : Achievements / Contact -->
-        <div class="leaf" id="leaf4" data-index="4">
-          <div class="face front paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter VII</div>
-              <span class="eyebrow">Chapter VII</span>
-              <h2 class="page-title">Achievements</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="cred">
-                  <div class="cred-title">Top University CGPA</div>
-                  <div class="cred-desc">Maintaining a CGPA of 3.94 out of 4.00 with 126 credits completed in the BSc CSE program at United International University.</div>
-                  <span class="badge">3.94 / 4.00</span>
-                </div>
-                <div class="cred">
-                  <div class="cred-title">Academic Excellence — HSC</div>
-                  <div class="cred-desc">Achieved a perfect GPA of 5.00 / 5.00 in the Higher Secondary Certificate examination (2022).</div>
-                  <span class="badge">5.00 / 5.00</span>
-                </div>
-                <div class="cred">
-                  <div class="cred-title">Academic Excellence — SSC</div>
-                  <div class="cred-desc">Achieved a perfect GPA of 5.00 / 5.00 in the Secondary School Certificate examination (2018).</div>
-                  <span class="badge">5.00 / 5.00</span>
-                </div>
-              </div>
-              <div class="page-number">9</div>
-            </div>
-          </div>
-          <div class="face back paper">
-            <div class="page-pad">
-              <div class="running-head">Chapter VIII</div>
-              <span class="eyebrow">Chapter VIII</span>
-              <h2 class="page-title">Correspondence</h2>
-              <div class="page-divider"><span></span>❧<span></span></div>
-              <div class="page-body">
-                <div class="contact-list">
-                  <div class="contact-row"><span class="lbl">Email</span><a href="mailto:ibrahimzihad5@gmail.com">ibrahimzihad5@gmail.com</a></div>
-                  <div class="contact-row"><span class="lbl">Phone</span><a href="tel:+8801328911249">+880 1328911249</a></div>
-                  <div class="contact-row"><span class="lbl">Place</span><span>Dhaka, Bangladesh</span></div>
-                  <div class="contact-row"><span class="lbl">School</span><span>United International University</span></div>
-                </div>
-                <div class="seal-row">
-                  <a class="seal-btn" href="https://github.com/IbrahimZihad" target="_blank">GitHub</a>
-                  <a class="seal-btn" href="https://linkedin.com/in/ibrahim-zihad-637525317" target="_blank">LinkedIn</a>
-                  <a class="seal-btn" href="https://facebook.com/ibrahimzihad.zihad" target="_blank">Facebook</a>
-                </div>
-              </div>
-              <div class="page-number">10</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Leaf 5 : Colophon / Back cover -->
-        <div class="leaf" id="leaf5" data-index="5">
-          <div class="face front paper">
-            <div class="page-pad" style="align-items:center;text-align:center;">
-              <div class="colophon">
-                <div class="mark">❦</div>
-                <p>Thank you for turning these pages.</p>
-                <p>If a project or a role calls for a full-stack hand — I would be glad to hear from you.</p>
-                <div class="small">Set in Cinzel &amp; EB Garamond.<br>Bound digitally, Dhaka, 2026.</div>
-              </div>
-              <div class="page-number">11</div>
-            </div>
-          </div>
-          <div class="face back leather">
-            <span class="corner tl"></span><span class="corner tr"></span>
-            <span class="corner bl"></span><span class="corner br"></span>
-            <div class="page-pad" style="align-items:center;justify-content:center;text-align:center;">
-              <div class="cover-emblem">MIZ</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tabs" id="tabs"></div>
-        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous page">‹</button>
-        <button class="nav-arrow next" id="nextBtn" aria-label="Next page">›</button>
-        <div class="progress" id="progress"></div>
-        <div class="hint-row">use the arrows, or click a page edge, to turn</div>
       </div>
 
-      <!-- CLOSED: BACK COVER -->
-      <div class="backcover-screen" id="backCoverScreen" hidden>
-        <div class="leather-panel">
-          <span class="corner tl"></span><span class="corner tr"></span>
-          <span class="corner bl"></span><span class="corner br"></span>
-          <div class="cover-emblem">MIZ</div>
-          <p class="cover-sub" style="margin-top:6px;">— Fin —</p>
-          <button class="restart-btn" id="restartBtn">↺ Begin Again</button>
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-label">AI-Powered System <span class="ai-badge">✦ AI</span></div>
+          <div class="project-name">SmartLibrary</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">An autonomous library system inspired by Amazon Go — students borrow and return books without any human interaction. AI tracks students and books in real time, automatically updating carts, removing dropped items instantly, and triggering fines for overdue returns.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Computer Vision</span>
+            <span class="stack-tag">PHP</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">HTML/CSS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/IbrahimZihad/SmartLibrary" target="_blank" class="project-link">↗ GitHub</a>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
-</div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <p class="section-label reveal">Learning</p>
+    <h2 class="section-title reveal">Certifications & Courses</h2>
+    <p class="section-sub reveal">Structured programs completed and currently underway.</p>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon">🎖️</div>
+        <div class="cert-title">Frontend Mastery with JavaScript, React & Next.js (TypeScript)</div>
+        <div class="cert-issuer">CDIP — United International University</div>
+        <p class="cert-desc">A 36-hour intensive training program covering modern frontend development with JavaScript, React, and Next.js using TypeScript. Issued December 2025.</p>
+        <div class="cert-badge done">✓ Completed · Dec 2025</div>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🚀</div>
+        <div class="cert-title">Full Stack Web Development with Python, Django, React & AI</div>
+        <div class="cert-issuer">Ostad.app</div>
+        <p class="cert-desc">A comprehensive full-stack course covering Python, Django, React, and AI integration for building production-grade web applications. Currently in progress.</p>
+        <div class="cert-badge ongoing">⏳ In Progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <p class="section-label reveal">Recognition</p>
+    <h2 class="section-title reveal">Academic Achievements</h2>
+    <p class="section-sub reveal">Milestones earned from school through university.</p>
+    <div class="achieve-grid">
+      <div class="achieve-card reveal">
+        <div class="achieve-icon">🎓</div>
+        <div class="achieve-title">Top University CGPA</div>
+        <div class="achieve-desc">Maintaining a CGPA of 3.94 out of 4.00 with 126 credits completed in the BSc Computer Science & Engineering program at United International University.</div>
+        <div class="achieve-badge">CGPA 3.94 / 4.00</div>
+      </div>
+      <div class="achieve-card reveal">
+        <div class="achieve-icon">🥇</div>
+        <div class="achieve-title">Academic Excellence — HSC</div>
+        <div class="achieve-desc">Achieved a perfect GPA of 5.00 / 5.00 in the Higher Secondary Certificate examination (2022) from Birshrestha Noor Muhammad Public College.</div>
+        <div class="achieve-badge">GPA 5.00 / 5.00</div>
+      </div>
+      <div class="achieve-card reveal">
+        <div class="achieve-icon">🏆</div>
+        <div class="achieve-title">Academic Excellence — SSC</div>
+        <div class="achieve-desc">Achieved a perfect GPA of 5.00 / 5.00 in the Secondary School Certificate examination (2018) from Ghatail Cantonment Public School and College.</div>
+        <div class="achieve-badge">GPA 5.00 / 5.00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="contact-left reveal">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Let's Connect</h2>
+        <p>I'm open to new opportunities, collaborations, and conversations. Whether you have a project in mind or just want to say hello — feel free to reach out!</p>
+        <div class="social-row">
+          <a href="https://github.com/IbrahimZihad" target="_blank" class="social-btn">
+            <span>🐙</span> GitHub
+          </a>
+          <a href="https://linkedin.com/in/ibrahim-zihad-637525317" target="_blank" class="social-btn">
+            <span>💼</span> LinkedIn
+          </a>
+          <a href="https://facebook.com/ibrahimzihad.zihad" target="_blank" class="social-btn">
+            <span>📘</span> Facebook
+          </a>
+        </div>
+      </div>
+      <div class="contact-details reveal">
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value"><a href="mailto:ibrahimzihad5@gmail.com">ibrahimzihad5@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📱</div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value"><a href="tel:+8801328911249">+880 1328911249</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">Dhaka, Bangladesh</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🎓</div>
+          <div>
+            <div class="contact-item-label">University</div>
+            <div class="contact-item-value">United International University</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 <span>Md. Ibrahim Zihad</span>. Built with HTML, CSS & JavaScript.</p>
+</footer>
 
 <script>
-(function(){
-  const TAB_DEFS = [
-    { label:'About',         target:1 },
-    { label:'Education',     target:2 },
-    { label:'Skills',        target:2 },
-    { label:'Experience',    target:3 },
-    { label:'Projects',      target:3 },
-    { label:'Certs',         target:4 },
-    { label:'Achievements',  target:4 },
-    { label:'Contact',       target:5 },
-  ];
-  const LEAF_COUNT = 6;
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
 
-  const coverScreen = document.getElementById('coverScreen');
-  const backCoverScreen = document.getElementById('backCoverScreen');
-  const bookSpread = document.getElementById('bookSpread');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const progressEl = document.getElementById('progress');
-  const tabsEl = document.getElementById('tabs');
-  const restartBtn = document.getElementById('restartBtn');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-  const leaves = [];
-  for(let i=0;i<LEAF_COUNT;i++) leaves.push(document.getElementById('leaf'+i));
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
 
-  let currentLeaf = 0;   // number of leaves flipped to the left
-  let inSpread = false;  // whether spread view is showing
-
-  function buildTabs(){
-    tabsEl.innerHTML = '';
-    TAB_DEFS.forEach((t)=>{
-      const el = document.createElement('div');
-      el.className = 'tab';
-      el.textContent = t.label;
-      el.addEventListener('click', (e)=>{ e.stopPropagation(); jumpTo(t.target); });
-      tabsEl.appendChild(el);
+  document.querySelectorAll('.mm-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
     });
-  }
-  buildTabs();
+  });
 
-  function updateZIndex(){
-    leaves.forEach((leaf, i)=>{
-      const flipped = i < currentLeaf;
-      leaf.style.zIndex = flipped ? (100 + i) : (LEAF_COUNT - i);
-    });
-  }
-
-  function updateChrome(){
-    prevBtn.disabled = currentLeaf === 0;
-    nextBtn.disabled = currentLeaf >= LEAF_COUNT;
-    const chapter = Math.min(currentLeaf, LEAF_COUNT - 1) + 1;
-    progressEl.textContent = 'Leaf ' + Math.max(currentLeaf,1) + ' of ' + LEAF_COUNT;
-
-    const tabEls = tabsEl.querySelectorAll('.tab');
-    tabEls.forEach((el, i)=>{
-      el.classList.toggle('current', TAB_DEFS[i].target === currentLeaf);
-    });
-  }
-
-  function applyLeafStates(animate){
-    leaves.forEach((leaf, i)=>{
-      const shouldFlip = i < currentLeaf;
-      if(!animate) leaf.classList.add('no-anim');
-      leaf.classList.toggle('flipped', shouldFlip);
-      if(!animate){
-        void leaf.offsetWidth; // reflow
-        leaf.classList.remove('no-anim');
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80 * (entry.target.dataset.delay || 0));
+        observer.unobserve(entry.target);
       }
     });
-    updateZIndex();
-    updateChrome();
-  }
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  function openBook(){
-    if(inSpread) return;
-    inSpread = true;
-    coverScreen.setAttribute('hidden','');
-    bookSpread.classList.add('active');
-    currentLeaf = 0;
-    applyLeafStates(false);
-    // animate the opening flip on next frame
-    requestAnimationFrame(()=>{
-      requestAnimationFrame(()=>{
-        currentLeaf = 1;
-        applyLeafStates(true);
-      });
+  reveals.forEach((el, i) => {
+    el.dataset.delay = i % 4;
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
-  }
-
-  function closeToFrontCover(){
-    inSpread = false;
-    bookSpread.classList.remove('active');
-    backCoverScreen.setAttribute('hidden','');
-    coverScreen.removeAttribute('hidden');
-  }
-
-  function closeToBackCover(){
-    inSpread = false;
-    bookSpread.classList.remove('active');
-    backCoverScreen.removeAttribute('hidden');
-  }
-
-  function next(){
-    if(currentLeaf >= LEAF_COUNT) return;
-    currentLeaf++;
-    applyLeafStates(true);
-    if(currentLeaf === LEAF_COUNT){
-      setTimeout(closeToBackCover, 950);
-    }
-  }
-
-  function prev(){
-    if(currentLeaf <= 0){
-      return;
-    }
-    currentLeaf--;
-    if(currentLeaf === 0){
-      applyLeafStates(true);
-      setTimeout(closeToFrontCover, 950);
-    } else {
-      applyLeafStates(true);
-    }
-  }
-
-  function jumpTo(target){
-    if(!inSpread) return;
-    currentLeaf = Math.max(1, Math.min(LEAF_COUNT, target));
-    applyLeafStates(true);
-  }
-
-  coverScreen.addEventListener('click', openBook);
-  restartBtn.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    currentLeaf = 0;
-    applyLeafStates(false);
-    closeToFrontCover();
   });
-  nextBtn.addEventListener('click', (e)=>{ e.stopPropagation(); next(); });
-  prevBtn.addEventListener('click', (e)=>{ e.stopPropagation(); prev(); });
-
-  // click on right half of spread = next, left half = prev
-  bookSpread.addEventListener('click', (e)=>{
-    const rect = bookSpread.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    if(x > rect.width * 0.52) next();
-    else if(x < rect.width * 0.48) prev();
-  });
-
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'ArrowRight') next();
-    if(e.key === 'ArrowLeft') prev();
-  });
-
-  // responsive scaling of the fixed-size book
-  const scaler = document.getElementById('scaler');
-  const BOOK_W = 1020, BOOK_H = 640;
-  function rescale(){
-    const availW = window.innerWidth * 0.86;
-    const availH = window.innerHeight * 0.78;
-    const scale = Math.min(availW / BOOK_W, availH / BOOK_H, 1.05);
-    scaler.style.transform = 'scale(' + scale + ')';
-  }
-  window.addEventListener('resize', rescale);
-  rescale();
-
-  applyLeafStates(false);
-})();
 </script>
 </body>
 </html>
