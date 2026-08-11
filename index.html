@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -959,7 +959,7 @@
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="num">3.94<span>/4</span></div>
+        <div class="num">3.93<span>/4</span></div>
         <div class="label">CGPA</div>
       </div>
       <div class="hero-stat">
@@ -967,7 +967,7 @@
         <div class="label">Credits Done</div>
       </div>
       <div class="hero-stat">
-        <div class="num">3</div>
+        <div class="num">4</div>
         <div class="label">Projects Built</div>
       </div>
       <div class="hero-stat">
@@ -991,15 +991,15 @@
       </div>
       <div class="about-stats-block reveal">
         <div class="stat-card">
-          <div class="n">3.94</div>
-          <div class="l">Current CGPA — BSc CSE</div>
+          <div class="n">3.93</div>
+          <div class="l">Current CGPA — BSCSE</div>
         </div>
         <div class="stat-card">
           <div class="n">126</div>
           <div class="l">Credits Completed</div>
         </div>
         <div class="stat-card">
-          <div class="n">3</div>
+          <div class="n">4</div>
           <div class="l">Projects Built</div>
         </div>
       </div>
@@ -1018,9 +1018,9 @@
         <div>
           <div class="edu-degree">BSc in Computer Science & Engineering</div>
           <div class="edu-school">United International University, Dhaka</div>
-          <div class="edu-detail">CGPA: 3.94 / 4.00 &nbsp;·&nbsp; 126 Credits Completed &nbsp;·&nbsp; Final Semester</div>
+          <div class="edu-detail">CGPA: 3.93 / 4.00 </div>
         </div>
-        <div class="edu-year">2022 – Present</div>
+        <div class="edu-year">2022 – 2026</div>
       </div>
       <div class="edu-card reveal">
         <div>
@@ -1355,6 +1355,1080 @@
       }
     });
   });
+</script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Md. Ibrahim Zihad — A Portfolio, Bound</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- token system ---- */
+    --leather-1:#5a2318;
+    --leather-2:#3a140d;
+    --leather-3:#7a3220;
+    --leather-shine: rgba(255,214,150,0.10);
+    --gold:#c6a15b;
+    --gold-bright:#f0d59a;
+    --gold-dim:#8a6d3a;
+    --paper:#f3ead1;
+    --paper-2:#eaddb8;
+    --paper-3:#dfcf9f;
+    --paper-shadow:#c9b689;
+    --ink:#3a2b1c;
+    --ink-soft:#6c5a42;
+    --ink-faint:#9c8a6c;
+    --wax:#7c1f1a;
+    --desk-1:#0e0a07;
+    --desk-2:#241810;
+    --desk-3:#140d08;
+    --font-display:'Cinzel', serif;
+    --font-title:'Cinzel Decorative', serif;
+    --font-body:'EB Garamond', serif;
+    --book-w:1020px;
+    --book-h:640px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+  html,body{height:100%;}
+  body{
+    background: radial-gradient(ellipse 90% 70% at 50% 30%, var(--desk-2) 0%, var(--desk-1) 65%, #050403 100%);
+    font-family: var(--font-body);
+    color: var(--ink);
+    overflow:hidden;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* faint room vignette + grain */
+  .room{
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 38%, rgba(255,196,120,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 120% 90% at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 55%);
+    pointer-events:none;
+    z-index:1;
+    animation: flicker 9s ease-in-out infinite;
+  }
+  @keyframes flicker{
+    0%,100%{ opacity:1; }
+    45%{ opacity:0.92; }
+    50%{ opacity:1; }
+    78%{ opacity:0.95; }
+  }
+  .grain{
+    position:fixed; inset:0; z-index:2; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .stage{
+    position:relative;
+    z-index:3;
+    width:100vw; height:100vh;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .scaler{
+    width:var(--book-w);
+    height:var(--book-h);
+    transform-origin:center center;
+    position:relative;
+  }
+
+  .book-scene{
+    width:100%; height:100%;
+    position:relative;
+    perspective:2600px;
+    perspective-origin:50% 45%;
+  }
+
+  /* subtle desk shadow under the book */
+  .book-shadow{
+    position:absolute;
+    left:4%; right:4%; bottom:-26px; height:40px;
+    background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(0,0,0,0.55), transparent 75%);
+    filter: blur(4px);
+    z-index:0;
+  }
+
+  /* =========================================================
+     FRONT / BACK COVER SCREENS (closed book views)
+  ========================================================= */
+  .cover-screen, .backcover-screen{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    transform-style:preserve-3d;
+    cursor:pointer;
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .cover-screen[hidden], .backcover-screen[hidden]{ display:none; }
+
+  .leather-panel{
+    position:relative;
+    width:74%; height:96%;
+    border-radius: 6px 14px 14px 6px;
+    background:
+      radial-gradient(120% 90% at 20% 10%, var(--leather-shine), transparent 45%),
+      repeating-linear-gradient(125deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 5px),
+      linear-gradient(155deg, var(--leather-3) 0%, var(--leather-1) 45%, var(--leather-2) 100%);
+    box-shadow:
+      inset 0 0 0 2px rgba(198,161,91,0.35),
+      inset 0 0 60px rgba(0,0,0,0.55),
+      0 30px 60px rgba(0,0,0,0.65);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:14px;
+    padding:40px;
+    text-align:center;
+  }
+  .leather-panel::before{
+    content:'';
+    position:absolute; inset:14px;
+    border:1px solid rgba(198,161,91,0.55);
+    border-radius:4px 10px 10px 4px;
+    pointer-events:none;
+  }
+  .leather-panel::after{
+    content:'';
+    position:absolute; inset:22px;
+    border:1px solid rgba(198,161,91,0.25);
+    border-radius:3px 8px 8px 3px;
+    pointer-events:none;
+  }
+
+  .corner{
+    position:absolute; width:26px; height:26px;
+    border:2px solid var(--gold-dim);
+    opacity:0.75;
+  }
+  .corner.tl{ top:8px; left:8px; border-right:none; border-bottom:none; }
+  .corner.tr{ top:8px; right:8px; border-left:none; border-bottom:none; }
+  .corner.bl{ bottom:8px; left:8px; border-right:none; border-top:none; }
+  .corner.br{ bottom:8px; right:8px; border-left:none; border-top:none; }
+
+  .ornament{ color:var(--gold); font-size:1.3rem; opacity:0.8; letter-spacing:0.3em; }
+
+  .cover-emblem{
+    width:74px; height:74px;
+    border-radius:50%;
+    border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display);
+    font-weight:700;
+    letter-spacing:0.06em;
+    color:var(--gold-bright);
+    font-size:1.15rem;
+    box-shadow: inset 0 0 0 4px rgba(198,161,91,0.18), 0 0 22px rgba(198,161,91,0.15);
+  }
+
+  .cover-title{
+    font-family:var(--font-title);
+    color:var(--gold-bright);
+    font-size:clamp(1.9rem, 3.4vw, 2.7rem);
+    line-height:1.25;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.4), 0 0 24px rgba(198,161,91,0.18);
+    letter-spacing:0.02em;
+  }
+
+  .cover-rule{
+    display:flex; align-items:center; gap:12px;
+    color:var(--gold);
+    font-size:0.8rem;
+    width:60%;
+  }
+  .cover-rule span{ flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+  .cover-role{
+    font-family:var(--font-display);
+    color:var(--gold);
+    letter-spacing:0.28em;
+    font-size:0.78rem;
+    text-transform:uppercase;
+  }
+  .cover-sub{
+    font-style:italic;
+    color:var(--ink-faint);
+    font-size:0.95rem;
+    opacity:0.85;
+  }
+
+  .wax-seal{
+    position:absolute; bottom:34px; right:44px;
+    width:52px; height:52px; border-radius:50%;
+    background: radial-gradient(circle at 32% 28%, #a83a30, var(--wax) 60%, #5c1210 100%);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 0 8px rgba(0,0,0,0.5);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display);
+    font-size:0.62rem;
+    font-weight:700;
+    color:rgba(255,230,200,0.85);
+    letter-spacing:0.05em;
+    transform:rotate(-8deg);
+  }
+
+  .open-hint{
+    margin-top:6px;
+    font-family:var(--font-display);
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    opacity:0.8;
+    animation: pulseHint 2.4s ease-in-out infinite;
+  }
+  @keyframes pulseHint{
+    0%,100%{ opacity:0.5; transform:translateY(0); }
+    50%{ opacity:1; transform:translateY(-3px); }
+  }
+
+  .restart-btn{
+    margin-top:8px;
+    font-family:var(--font-display);
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--leather-1);
+    background:var(--gold-bright);
+    border:none;
+    padding:10px 22px;
+    border-radius:100px;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,0.4);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .restart-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.5); }
+
+  /* =========================================================
+     OPEN SPREAD
+  ========================================================= */
+  .book-spread{
+    position:absolute; inset:0;
+    transform-style:preserve-3d;
+    display:none;
+  }
+  .book-spread.active{ display:block; }
+
+  .spine{
+    position:absolute; left:50%; top:1%; bottom:1%;
+    width:34px; margin-left:-17px;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 20%, rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.5) 100%),
+      linear-gradient(180deg, var(--leather-3), var(--leather-1) 50%, var(--leather-2));
+    z-index:60;
+    box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    border-radius:2px;
+  }
+
+  /* decorative stacked-paper edges for depth */
+  .stack-edge{
+    position:absolute; top:2%; bottom:2%; width:46%;
+    z-index:1;
+    border-radius:2px;
+    pointer-events:none;
+  }
+  .stack-edge.right{
+    right:0.6%;
+    background: repeating-linear-gradient(90deg, var(--paper-2) 0 2px, var(--paper-3) 2px 3px);
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.35);
+  }
+  .stack-edge.left{
+    left:0.6%;
+    background: repeating-linear-gradient(90deg, var(--paper-3) 0 2px, var(--paper-2) 2px 3px);
+    box-shadow: -2px 2px 10px rgba(0,0,0,0.35);
+  }
+
+  .leaf{
+    position:absolute; top:2%; bottom:2%; right:0.6%;
+    width:46%;
+    transform-style:preserve-3d;
+    transform-origin:left center;
+    transform:rotateY(0deg);
+    transition:transform 1.05s cubic-bezier(.45,.05,.2,1);
+    border-radius:2px;
+  }
+  .leaf.flipped{ transform:rotateY(-180deg); }
+  .leaf.no-anim{ transition:none; }
+
+  .face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    overflow:hidden;
+    border-radius:2px;
+    box-shadow: 0 2px 18px rgba(0,0,0,0.35);
+  }
+  .face.back{ transform:rotateY(180deg); }
+
+  .face.paper{
+    background:
+      radial-gradient(140% 100% at 0% 0%, rgba(255,255,255,0.25), transparent 40%),
+      linear-gradient(120deg, var(--paper) 0%, var(--paper-2) 100%);
+  }
+  .face.paper::before{
+    content:'';
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity:0.05;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .face.paper.front{ box-shadow: inset 12px 0 24px -18px rgba(0,0,0,0.35), 0 2px 18px rgba(0,0,0,0.35); }
+  .face.paper.back{ box-shadow: inset -12px 0 24px -18px rgba(0,0,0,0.35), 0 2px 18px rgba(0,0,0,0.35); }
+
+  .face.leather{
+    background:
+      radial-gradient(120% 90% at 15% 10%, var(--leather-shine), transparent 45%),
+      repeating-linear-gradient(125deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 5px),
+      linear-gradient(155deg, var(--leather-3) 0%, var(--leather-1) 45%, var(--leather-2) 100%);
+  }
+
+  .page-pad{
+    position:relative; z-index:2;
+    height:100%; width:100%;
+    padding:34px 34px 44px;
+    display:flex; flex-direction:column;
+    overflow-y:auto;
+  }
+  .page-pad::-webkit-scrollbar{ width:6px; }
+  .page-pad::-webkit-scrollbar-thumb{ background:var(--gold-dim); border-radius:4px; }
+  .page-pad::-webkit-scrollbar-track{ background:transparent; }
+
+  .running-head{
+    font-family:var(--font-display);
+    font-size:0.62rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    text-align:center;
+    margin-bottom:14px;
+    opacity:0.7;
+  }
+
+  .eyebrow{
+    font-family:var(--font-display);
+    font-size:0.68rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--wax);
+    display:block;
+    margin-bottom:6px;
+  }
+  .page-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.55rem;
+    color:var(--ink);
+    margin-bottom:6px;
+    letter-spacing:0.01em;
+  }
+  .page-divider{
+    display:flex; align-items:center; gap:8px;
+    color:var(--gold-dim);
+    font-size:0.75rem;
+    margin-bottom:16px;
+  }
+  .page-divider span{ flex:1; height:1px; background:linear-gradient(90deg, var(--gold-dim), transparent); }
+
+  .page-body{ flex:1; font-size:0.92rem; line-height:1.75; color:var(--ink-soft); }
+  .page-body p{ margin-bottom:12px; }
+  .page-body p:first-of-type::first-letter{
+    font-family:var(--font-title);
+    font-size:2.6rem;
+    float:left;
+    line-height:0.8;
+    padding:4px 8px 0 0;
+    color:var(--wax);
+  }
+
+  .margin-note{
+    display:inline-block;
+    font-family:var(--font-body);
+    font-style:italic;
+    font-size:0.8rem;
+    color:var(--wax);
+    border:1px dashed rgba(124,31,26,0.35);
+    padding:5px 10px;
+    border-radius:2px;
+    transform:rotate(-1.4deg);
+    background:rgba(124,31,26,0.04);
+    margin:6px 0 14px;
+  }
+
+  .page-number{
+    text-align:center;
+    font-family:var(--font-display);
+    font-size:0.7rem;
+    color:var(--ink-faint);
+    margin-top:10px;
+    letter-spacing:0.08em;
+  }
+
+  /* TOC */
+  .toc-list{ list-style:none; margin-top:6px; }
+  .toc-list li{
+    display:flex; align-items:baseline; gap:8px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    padding:7px 0;
+    border-bottom:1px dotted rgba(108,90,66,0.3);
+  }
+  .toc-num{ font-family:var(--font-display); color:var(--wax); font-size:0.82rem; width:22px; }
+  .toc-title{ font-weight:500; color:var(--ink); }
+  .toc-leader{ flex:1; border-bottom:1px dotted var(--ink-faint); transform:translateY(-4px); }
+  .toc-page{ font-family:var(--font-display); font-size:0.8rem; color:var(--ink-faint); }
+  .toc-note{ margin-top:16px; font-style:italic; color:var(--ink-faint); font-size:0.82rem; }
+
+  /* Education / Experience journal entries */
+  .entry{
+    padding:12px 0 12px 16px;
+    border-left:2px solid var(--gold-dim);
+    margin-bottom:14px;
+    position:relative;
+  }
+  .entry::before{
+    content:'';
+    position:absolute; left:-5px; top:16px;
+    width:8px; height:8px; border-radius:50%;
+    background:var(--wax);
+  }
+  .entry-title{ font-family:var(--font-display); font-weight:600; font-size:0.98rem; color:var(--ink); }
+  .entry-org{ font-style:italic; color:var(--wax); font-size:0.85rem; margin:2px 0 4px; }
+  .entry-meta{ font-size:0.8rem; color:var(--ink-faint); }
+  .entry ul{ margin:8px 0 0 18px; font-size:0.85rem; color:var(--ink-soft); }
+  .entry ul li{ margin-bottom:5px; }
+
+  /* skills */
+  .skill-group{ margin-bottom:16px; }
+  .skill-group h4{
+    font-family:var(--font-display); font-size:0.85rem; letter-spacing:0.06em;
+    color:var(--wax); margin-bottom:8px; text-transform:uppercase;
+  }
+  .skill-chips{ display:flex; flex-wrap:wrap; gap:7px; }
+  .chip{
+    font-size:0.78rem;
+    padding:4px 11px;
+    border:1px solid var(--gold-dim);
+    border-radius:100px;
+    color:var(--ink-soft);
+    background:rgba(198,161,91,0.08);
+  }
+
+  /* projects */
+  .proj{ margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid rgba(108,90,66,0.2); }
+  .proj:last-child{ border-bottom:none; }
+  .proj-name{ font-family:var(--font-display); font-weight:600; color:var(--ink); font-size:1rem; }
+  .proj-tag{ font-size:0.72rem; color:var(--wax); text-transform:uppercase; letter-spacing:0.06em; }
+  .proj-desc{ font-size:0.84rem; color:var(--ink-soft); margin:5px 0 7px; line-height:1.65; }
+  .proj-stack{ display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px; }
+  .proj-stack span{ font-size:0.68rem; color:var(--ink-faint); border:1px solid rgba(108,90,66,0.3); padding:2px 7px; border-radius:4px; }
+  .proj-link{ font-size:0.78rem; color:var(--wax); text-decoration:none; font-weight:600; }
+  .proj-link:hover{ text-decoration:underline; }
+
+  /* achievements/certs */
+  .cred{ margin-bottom:14px; }
+  .cred-title{ font-family:var(--font-display); font-weight:600; font-size:0.92rem; color:var(--ink); }
+  .cred-sub{ font-style:italic; color:var(--wax); font-size:0.8rem; margin:2px 0 4px; }
+  .cred-desc{ font-size:0.82rem; color:var(--ink-soft); line-height:1.6; }
+  .badge{
+    display:inline-block; margin-top:5px; font-size:0.7rem;
+    color:var(--wax); border:1px solid var(--wax); padding:2px 9px; border-radius:100px;
+  }
+
+  /* contact */
+  .contact-list{ display:flex; flex-direction:column; gap:11px; margin-bottom:16px; }
+  .contact-row{ display:flex; gap:10px; align-items:baseline; font-size:0.88rem; }
+  .contact-row .lbl{ font-family:var(--font-display); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--wax); width:78px; flex-shrink:0; }
+  .contact-row a{ color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--ink-faint); }
+  .contact-row a:hover{ color:var(--wax); }
+  .seal-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; }
+  .seal-btn{
+    font-family:var(--font-display); font-size:0.7rem; letter-spacing:0.06em;
+    color:var(--paper); background:var(--leather-1); border:1px solid var(--gold-dim);
+    padding:8px 15px; border-radius:100px; text-decoration:none;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .seal-btn:hover{ transform:translateY(-2px); background:var(--leather-3); }
+
+  /* colophon */
+  .colophon{ text-align:center; margin-top:auto; margin-bottom:auto; }
+  .colophon .mark{ font-size:1.8rem; color:var(--gold-dim); margin-bottom:10px; }
+  .colophon p{ font-size:0.82rem; font-style:italic; color:var(--ink-soft); margin-bottom:8px; }
+  .colophon .small{ font-size:0.72rem; color:var(--ink-faint); margin-top:14px; }
+
+  /* =========================================================
+     NAV: arrows, tabs, progress
+  ========================================================= */
+  .nav-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:46px; height:46px; border-radius:50%;
+    background:rgba(20,13,8,0.55);
+    border:1px solid var(--gold-dim);
+    color:var(--gold-bright);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.2rem;
+    cursor:pointer;
+    z-index:80;
+    transition: background .2s ease, transform .2s ease;
+    backdrop-filter: blur(3px);
+  }
+  .nav-arrow:hover{ background:rgba(198,161,91,0.25); }
+  .nav-arrow.prev{ left:-64px; }
+  .nav-arrow.next{ right:-64px; }
+  .nav-arrow[disabled]{ opacity:0.25; cursor:default; pointer-events:none; }
+
+  .progress{
+    position:absolute; left:50%; bottom:-38px; transform:translateX(-50%);
+    font-family:var(--font-display);
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+    z-index:80;
+    white-space:nowrap;
+  }
+
+  .tabs{
+    position:absolute; right:-13px; top:8%;
+    display:flex; flex-direction:column; gap:7px;
+    z-index:85;
+  }
+  .tab{
+    font-family:var(--font-display);
+    font-size:0.6rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--paper);
+    background:var(--wax);
+    padding:7px 5px;
+    writing-mode:vertical-rl;
+    border-radius:0 4px 4px 0;
+    cursor:pointer;
+    box-shadow:2px 2px 6px rgba(0,0,0,0.4);
+    opacity:0.88;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .tab:hover{ opacity:1; transform:translateX(3px); }
+  .tab.current{ background:var(--gold); color:var(--leather-2); opacity:1; }
+
+  .hint-row{
+    position:absolute; left:50%; bottom:-62px; transform:translateX(-50%);
+    font-size:0.72rem; color:rgba(240,213,154,0.55);
+    font-family:var(--font-body); font-style:italic;
+    white-space:nowrap;
+  }
+
+  @media (max-width:760px){
+    .nav-arrow.prev{ left:-8px; }
+    .nav-arrow.next{ right:-8px; }
+    .tabs{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="room"></div>
+<div class="grain"></div>
+
+<div class="stage" id="stage">
+  <div class="scaler" id="scaler">
+    <div class="book-scene">
+      <div class="book-shadow"></div>
+
+      <!-- CLOSED: FRONT COVER -->
+      <div class="cover-screen" id="coverScreen">
+        <div class="leather-panel">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <div class="ornament">❦</div>
+          <div class="cover-emblem">MIZ</div>
+          <h1 class="cover-title">Md. Ibrahim<br>Zihad</h1>
+          <div class="cover-rule"><span></span>◆<span></span></div>
+          <p class="cover-role">Full&nbsp;Stack&nbsp;Developer</p>
+          <p class="cover-sub">A Portfolio, Bound</p>
+          <div class="wax-seal">MIZ</div>
+          <div class="open-hint">Click to Open</div>
+        </div>
+      </div>
+
+      <!-- OPEN SPREAD -->
+      <div class="book-spread" id="bookSpread">
+        <div class="spine"></div>
+        <div class="stack-edge left"></div>
+        <div class="stack-edge right"></div>
+
+        <!-- Leaf 0 : Cover / Table of Contents -->
+        <div class="leaf" id="leaf0" data-index="0">
+          <div class="face front leather">
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+            <div class="page-pad" style="align-items:center;justify-content:center;text-align:center;">
+              <div class="ornament">❦</div>
+              <div class="cover-emblem" style="margin:14px auto;">MIZ</div>
+              <h1 class="cover-title" style="font-size:1.5rem;">Md. Ibrahim Zihad</h1>
+              <p class="cover-role" style="margin-top:8px;">Full Stack Developer</p>
+            </div>
+          </div>
+          <div class="face back paper">
+            <div class="page-pad">
+              <div class="running-head">Md. Ibrahim Zihad — Portfolio</div>
+              <span class="eyebrow">Contents</span>
+              <h2 class="page-title">Table of Contents</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <ul class="toc-list">
+                <li><span class="toc-num">I.</span><span class="toc-title">About the Author</span><span class="toc-leader"></span><span class="toc-page">3</span></li>
+                <li><span class="toc-num">II.</span><span class="toc-title">Education</span><span class="toc-leader"></span><span class="toc-page">4</span></li>
+                <li><span class="toc-num">III.</span><span class="toc-title">Skills &amp; Instruments</span><span class="toc-leader"></span><span class="toc-page">5</span></li>
+                <li><span class="toc-num">IV.</span><span class="toc-title">Experience</span><span class="toc-leader"></span><span class="toc-page">6</span></li>
+                <li><span class="toc-num">V.</span><span class="toc-title">Projects</span><span class="toc-leader"></span><span class="toc-page">7</span></li>
+                <li><span class="toc-num">VI.</span><span class="toc-title">Certifications</span><span class="toc-leader"></span><span class="toc-page">8</span></li>
+                <li><span class="toc-num">VII.</span><span class="toc-title">Achievements</span><span class="toc-leader"></span><span class="toc-page">9</span></li>
+                <li><span class="toc-num">VIII.</span><span class="toc-title">Correspondence</span><span class="toc-leader"></span><span class="toc-page">10</span></li>
+              </ul>
+              <p class="toc-note">Being a true and faithful account of one developer's work.</p>
+              <div class="page-number">ii</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaf 1 : About / Education -->
+        <div class="leaf" id="leaf1" data-index="1">
+          <div class="face front paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter I</div>
+              <span class="eyebrow">Chapter I</span>
+              <h2 class="page-title">About the Author</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <p>I am a full stack developer and final-semester Computer Science &amp; Engineering undergraduate at United International University, Dhaka. I build meaningful web products that solve real problems.</p>
+                <p>My craft spans modern frontend work with React.js and Next.js, backend APIs built with Express.js, and databases such as MySQL and MongoDB. I hold a particular fondness for weaving AI — from computer vision to language models — into practical, working applications.</p>
+                <span class="margin-note">✎ CGPA 3.94 / 4.00</span>
+                <p>With a strong academic record and genuine freelance experience behind me, I remain eager to join a team that values craft, curiosity, and impact in equal measure.</p>
+              </div>
+              <div class="page-number">3</div>
+            </div>
+          </div>
+          <div class="face back paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter II</div>
+              <span class="eyebrow">Chapter II</span>
+              <h2 class="page-title">Education</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="entry">
+                  <div class="entry-title">BSc in Computer Science &amp; Engineering</div>
+                  <div class="entry-org">United International University, Dhaka</div>
+                  <div class="entry-meta">CGPA 3.94 / 4.00 · 126 Credits Completed · Final Semester · 2022 – Present</div>
+                </div>
+                <div class="entry">
+                  <div class="entry-title">Higher Secondary Certificate (HSC)</div>
+                  <div class="entry-org">Birshrestha Noor Muhammad Public College</div>
+                  <div class="entry-meta">GPA 5.00 / 5.00 · 2022</div>
+                </div>
+                <div class="entry">
+                  <div class="entry-title">Secondary School Certificate (SSC)</div>
+                  <div class="entry-org">Ghatail Cantonment Public School and College</div>
+                  <div class="entry-meta">GPA 5.00 / 5.00 · 2018</div>
+                </div>
+              </div>
+              <div class="page-number">4</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaf 2 : Skills / Experience -->
+        <div class="leaf" id="leaf2" data-index="2">
+          <div class="face front paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter III</div>
+              <span class="eyebrow">Chapter III</span>
+              <h2 class="page-title">Skills &amp; Instruments</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="skill-group">
+                  <h4>Frontend Development</h4>
+                  <div class="skill-chips">
+                    <span class="chip">React.js</span><span class="chip">Next.js</span><span class="chip">JavaScript</span>
+                    <span class="chip">TypeScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span>
+                  </div>
+                </div>
+                <div class="skill-group">
+                  <h4>Backend Development</h4>
+                  <div class="skill-chips">
+                    <span class="chip">Express.js</span><span class="chip">Node.js</span><span class="chip">Java</span>
+                    <span class="chip">Python</span><span class="chip">C++</span>
+                  </div>
+                </div>
+                <div class="skill-group">
+                  <h4>Databases &amp; Tools</h4>
+                  <div class="skill-chips">
+                    <span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Sequelize ORM</span>
+                    <span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Docker</span>
+                  </div>
+                </div>
+                <div class="skill-group">
+                  <h4>AI &amp; Domains</h4>
+                  <div class="skill-chips">
+                    <span class="chip">Computer Vision</span><span class="chip">NLP</span><span class="chip">LLM Integration</span>
+                    <span class="chip">REST API Design</span>
+                  </div>
+                </div>
+              </div>
+              <div class="page-number">5</div>
+            </div>
+          </div>
+          <div class="face back paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter IV</div>
+              <span class="eyebrow">Chapter IV</span>
+              <h2 class="page-title">Experience</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="entry">
+                  <div class="entry-title">Freelance Web Developer</div>
+                  <div class="entry-org">Self-Employed · Remote</div>
+                  <div class="entry-meta">2024 – Present</div>
+                  <ul>
+                    <li>Designed and developed SubscriptionsBD — a full-stack platform for selling and managing digital subscriptions — for a real client.</li>
+                    <li>Handled the entire product lifecycle independently: frontend UX with Next.js &amp; Tailwind CSS, a REST backend with Express.js, and database design with MongoDB.</li>
+                    <li>Delivered a type-safe, production-ready system with purchase flows, user management, and order tracking.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="page-number">6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaf 3 : Projects / Certifications -->
+        <div class="leaf" id="leaf3" data-index="3">
+          <div class="face front paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter V</div>
+              <span class="eyebrow">Chapter V</span>
+              <h2 class="page-title">Projects</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="proj">
+                  <div class="proj-tag">Subscription Platform · Freelance</div>
+                  <div class="proj-name">SubscriptionsBD</div>
+                  <p class="proj-desc">A full-stack platform for selling and managing digital subscriptions, built for a real client — with purchase flows, user management and order tracking, end to end.</p>
+                  <div class="proj-stack"><span>Next.js</span><span>TypeScript</span><span>Tailwind</span><span>Express.js</span><span>MongoDB</span></div>
+                  <a class="proj-link" href="https://github.com/IbrahimZihad/Subscription-seller" target="_blank">↗ GitHub</a>
+                </div>
+                <div class="proj">
+                  <div class="proj-tag">Online Travel Agency</div>
+                  <div class="proj-name">Pothik</div>
+                  <p class="proj-desc">An OTA platform empowering users to independently plan and customize their dream tour itineraries — fully self-service, no travel agent required.</p>
+                  <div class="proj-stack"><span>React.js</span><span>Vite</span><span>Tailwind</span><span>Express.js</span><span>Node.js</span></div>
+                  <a class="proj-link" href="https://pothik-six.vercel.app" target="_blank">↗ Live Demo</a>
+                </div>
+                <div class="proj">
+                  <div class="proj-tag">AI-Powered System</div>
+                  <div class="proj-name">SmartLibrary</div>
+                  <p class="proj-desc">An autonomous library system inspired by Amazon Go — students borrow and return books without human interaction, with AI tracking items and triggering fines in real time.</p>
+                  <div class="proj-stack"><span>Python</span><span>Computer Vision</span><span>PHP</span><span>JavaScript</span></div>
+                  <a class="proj-link" href="https://github.com/IbrahimZihad/SmartLibrary" target="_blank">↗ GitHub</a>
+                </div>
+              </div>
+              <div class="page-number">7</div>
+            </div>
+          </div>
+          <div class="face back paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter VI</div>
+              <span class="eyebrow">Chapter VI</span>
+              <h2 class="page-title">Certifications</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="cred">
+                  <div class="cred-title">Frontend Mastery with JavaScript, React &amp; Next.js (TypeScript)</div>
+                  <div class="cred-sub">CDIP — United International University</div>
+                  <div class="cred-desc">A 36-hour intensive training program covering modern frontend development with JavaScript, React, and Next.js using TypeScript.</div>
+                  <span class="badge">Completed · Dec 2025</span>
+                </div>
+                <div class="cred">
+                  <div class="cred-title">Full Stack Web Development with Python, Django, React &amp; AI</div>
+                  <div class="cred-sub">Ostad.app</div>
+                  <div class="cred-desc">A comprehensive full-stack course covering Python, Django, React, and AI integration for production-grade web applications.</div>
+                  <span class="badge">In Progress</span>
+                </div>
+              </div>
+              <div class="page-number">8</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaf 4 : Achievements / Contact -->
+        <div class="leaf" id="leaf4" data-index="4">
+          <div class="face front paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter VII</div>
+              <span class="eyebrow">Chapter VII</span>
+              <h2 class="page-title">Achievements</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="cred">
+                  <div class="cred-title">Top University CGPA</div>
+                  <div class="cred-desc">Maintaining a CGPA of 3.94 out of 4.00 with 126 credits completed in the BSc CSE program at United International University.</div>
+                  <span class="badge">3.94 / 4.00</span>
+                </div>
+                <div class="cred">
+                  <div class="cred-title">Academic Excellence — HSC</div>
+                  <div class="cred-desc">Achieved a perfect GPA of 5.00 / 5.00 in the Higher Secondary Certificate examination (2022).</div>
+                  <span class="badge">5.00 / 5.00</span>
+                </div>
+                <div class="cred">
+                  <div class="cred-title">Academic Excellence — SSC</div>
+                  <div class="cred-desc">Achieved a perfect GPA of 5.00 / 5.00 in the Secondary School Certificate examination (2018).</div>
+                  <span class="badge">5.00 / 5.00</span>
+                </div>
+              </div>
+              <div class="page-number">9</div>
+            </div>
+          </div>
+          <div class="face back paper">
+            <div class="page-pad">
+              <div class="running-head">Chapter VIII</div>
+              <span class="eyebrow">Chapter VIII</span>
+              <h2 class="page-title">Correspondence</h2>
+              <div class="page-divider"><span></span>❧<span></span></div>
+              <div class="page-body">
+                <div class="contact-list">
+                  <div class="contact-row"><span class="lbl">Email</span><a href="mailto:ibrahimzihad5@gmail.com">ibrahimzihad5@gmail.com</a></div>
+                  <div class="contact-row"><span class="lbl">Phone</span><a href="tel:+8801328911249">+880 1328911249</a></div>
+                  <div class="contact-row"><span class="lbl">Place</span><span>Dhaka, Bangladesh</span></div>
+                  <div class="contact-row"><span class="lbl">School</span><span>United International University</span></div>
+                </div>
+                <div class="seal-row">
+                  <a class="seal-btn" href="https://github.com/IbrahimZihad" target="_blank">GitHub</a>
+                  <a class="seal-btn" href="https://linkedin.com/in/ibrahim-zihad-637525317" target="_blank">LinkedIn</a>
+                  <a class="seal-btn" href="https://facebook.com/ibrahimzihad.zihad" target="_blank">Facebook</a>
+                </div>
+              </div>
+              <div class="page-number">10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaf 5 : Colophon / Back cover -->
+        <div class="leaf" id="leaf5" data-index="5">
+          <div class="face front paper">
+            <div class="page-pad" style="align-items:center;text-align:center;">
+              <div class="colophon">
+                <div class="mark">❦</div>
+                <p>Thank you for turning these pages.</p>
+                <p>If a project or a role calls for a full-stack hand — I would be glad to hear from you.</p>
+                <div class="small">Set in Cinzel &amp; EB Garamond.<br>Bound digitally, Dhaka, 2026.</div>
+              </div>
+              <div class="page-number">11</div>
+            </div>
+          </div>
+          <div class="face back leather">
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+            <div class="page-pad" style="align-items:center;justify-content:center;text-align:center;">
+              <div class="cover-emblem">MIZ</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabs"></div>
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous page">‹</button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next page">›</button>
+        <div class="progress" id="progress"></div>
+        <div class="hint-row">use the arrows, or click a page edge, to turn</div>
+      </div>
+
+      <!-- CLOSED: BACK COVER -->
+      <div class="backcover-screen" id="backCoverScreen" hidden>
+        <div class="leather-panel">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+          <div class="cover-emblem">MIZ</div>
+          <p class="cover-sub" style="margin-top:6px;">— Fin —</p>
+          <button class="restart-btn" id="restartBtn">↺ Begin Again</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const TAB_DEFS = [
+    { label:'About',         target:1 },
+    { label:'Education',     target:2 },
+    { label:'Skills',        target:2 },
+    { label:'Experience',    target:3 },
+    { label:'Projects',      target:3 },
+    { label:'Certs',         target:4 },
+    { label:'Achievements',  target:4 },
+    { label:'Contact',       target:5 },
+  ];
+  const LEAF_COUNT = 6;
+
+  const coverScreen = document.getElementById('coverScreen');
+  const backCoverScreen = document.getElementById('backCoverScreen');
+  const bookSpread = document.getElementById('bookSpread');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const progressEl = document.getElementById('progress');
+  const tabsEl = document.getElementById('tabs');
+  const restartBtn = document.getElementById('restartBtn');
+
+  const leaves = [];
+  for(let i=0;i<LEAF_COUNT;i++) leaves.push(document.getElementById('leaf'+i));
+
+  let currentLeaf = 0;   // number of leaves flipped to the left
+  let inSpread = false;  // whether spread view is showing
+
+  function buildTabs(){
+    tabsEl.innerHTML = '';
+    TAB_DEFS.forEach((t)=>{
+      const el = document.createElement('div');
+      el.className = 'tab';
+      el.textContent = t.label;
+      el.addEventListener('click', (e)=>{ e.stopPropagation(); jumpTo(t.target); });
+      tabsEl.appendChild(el);
+    });
+  }
+  buildTabs();
+
+  function updateZIndex(){
+    leaves.forEach((leaf, i)=>{
+      const flipped = i < currentLeaf;
+      leaf.style.zIndex = flipped ? (100 + i) : (LEAF_COUNT - i);
+    });
+  }
+
+  function updateChrome(){
+    prevBtn.disabled = currentLeaf === 0;
+    nextBtn.disabled = currentLeaf >= LEAF_COUNT;
+    const chapter = Math.min(currentLeaf, LEAF_COUNT - 1) + 1;
+    progressEl.textContent = 'Leaf ' + Math.max(currentLeaf,1) + ' of ' + LEAF_COUNT;
+
+    const tabEls = tabsEl.querySelectorAll('.tab');
+    tabEls.forEach((el, i)=>{
+      el.classList.toggle('current', TAB_DEFS[i].target === currentLeaf);
+    });
+  }
+
+  function applyLeafStates(animate){
+    leaves.forEach((leaf, i)=>{
+      const shouldFlip = i < currentLeaf;
+      if(!animate) leaf.classList.add('no-anim');
+      leaf.classList.toggle('flipped', shouldFlip);
+      if(!animate){
+        void leaf.offsetWidth; // reflow
+        leaf.classList.remove('no-anim');
+      }
+    });
+    updateZIndex();
+    updateChrome();
+  }
+
+  function openBook(){
+    if(inSpread) return;
+    inSpread = true;
+    coverScreen.setAttribute('hidden','');
+    bookSpread.classList.add('active');
+    currentLeaf = 0;
+    applyLeafStates(false);
+    // animate the opening flip on next frame
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        currentLeaf = 1;
+        applyLeafStates(true);
+      });
+    });
+  }
+
+  function closeToFrontCover(){
+    inSpread = false;
+    bookSpread.classList.remove('active');
+    backCoverScreen.setAttribute('hidden','');
+    coverScreen.removeAttribute('hidden');
+  }
+
+  function closeToBackCover(){
+    inSpread = false;
+    bookSpread.classList.remove('active');
+    backCoverScreen.removeAttribute('hidden');
+  }
+
+  function next(){
+    if(currentLeaf >= LEAF_COUNT) return;
+    currentLeaf++;
+    applyLeafStates(true);
+    if(currentLeaf === LEAF_COUNT){
+      setTimeout(closeToBackCover, 950);
+    }
+  }
+
+  function prev(){
+    if(currentLeaf <= 0){
+      return;
+    }
+    currentLeaf--;
+    if(currentLeaf === 0){
+      applyLeafStates(true);
+      setTimeout(closeToFrontCover, 950);
+    } else {
+      applyLeafStates(true);
+    }
+  }
+
+  function jumpTo(target){
+    if(!inSpread) return;
+    currentLeaf = Math.max(1, Math.min(LEAF_COUNT, target));
+    applyLeafStates(true);
+  }
+
+  coverScreen.addEventListener('click', openBook);
+  restartBtn.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    currentLeaf = 0;
+    applyLeafStates(false);
+    closeToFrontCover();
+  });
+  nextBtn.addEventListener('click', (e)=>{ e.stopPropagation(); next(); });
+  prevBtn.addEventListener('click', (e)=>{ e.stopPropagation(); prev(); });
+
+  // click on right half of spread = next, left half = prev
+  bookSpread.addEventListener('click', (e)=>{
+    const rect = bookSpread.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    if(x > rect.width * 0.52) next();
+    else if(x < rect.width * 0.48) prev();
+  });
+
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+
+  // responsive scaling of the fixed-size book
+  const scaler = document.getElementById('scaler');
+  const BOOK_W = 1020, BOOK_H = 640;
+  function rescale(){
+    const availW = window.innerWidth * 0.86;
+    const availH = window.innerHeight * 0.78;
+    const scale = Math.min(availW / BOOK_W, availH / BOOK_H, 1.05);
+    scaler.style.transform = 'scale(' + scale + ')';
+  }
+  window.addEventListener('resize', rescale);
+  rescale();
+
+  applyLeafStates(false);
+})();
 </script>
 </body>
 </html>
