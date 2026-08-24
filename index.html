@@ -75,6 +75,7 @@
       display: flex;
       list-style: none;
       gap: 2.5rem;
+      align-items: center;
     }
 
     .nav-links a {
@@ -87,6 +88,25 @@
     }
 
     .nav-links a:hover { color: var(--primary); }
+
+    .nav-cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--primary);
+      color: #ffffff !important;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      font-size: 0.82rem !important;
+      transition: all 0.25s;
+    }
+
+    .nav-cv-btn:hover {
+      background: var(--primary-dark);
+      color: #ffffff !important;
+      transform: translateY(-1px);
+    }
 
     .hamburger {
       display: none;
@@ -134,6 +154,11 @@
     }
 
     .mobile-menu a:hover { color: var(--primary); }
+
+    .mobile-menu .nav-cv-btn {
+      font-size: 1.2rem !important;
+      padding: 0.7rem 1.6rem;
+    }
 
     /* HERO */
     .hero {
@@ -845,6 +870,17 @@
       transform: translateY(-2px);
     }
 
+    .social-btn.cv-download {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .social-btn.cv-download:hover {
+      background: var(--primary-dark);
+      color: #ffffff;
+    }
+
     .contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
 
     .contact-item {
@@ -992,6 +1028,7 @@
     <li><a href="#certifications">Certs</a></li>
     <li><a href="#achievements">Achievements</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="Ibrahim%20Zihad%20Resume.pdf" download class="nav-cv-btn">⬇ Download CV</a></li>
   </ul>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
@@ -1007,6 +1044,7 @@
   <a href="#certifications" class="mm-link">Certs</a>
   <a href="#achievements" class="mm-link">Achievements</a>
   <a href="#contact" class="mm-link">Contact</a>
+  <a href="Ibrahim%20Zihad%20Resume.pdf" download class="mm-link nav-cv-btn">⬇ Download CV</a>
 </div>
 
 <!-- HERO -->
@@ -1036,6 +1074,7 @@
         <div class="hero-actions">
           <a href="#projects" class="btn btn-primary">View Projects</a>
           <a href="#contact" class="btn btn-outline">Get In Touch</a>
+          <a href="Ibrahim%20Zihad%20Resume.pdf" download class="btn btn-outline">⬇ Download CV</a>
         </div>
 
         <div class="hero-stats">
@@ -1050,7 +1089,7 @@
           </div>
 
           <div class="hero-stat">
-            <div class="num">5</div>
+            <div class="num">6</div>
             <div class="label">Projects Built</div>
           </div>
 
@@ -1091,7 +1130,7 @@
           <div class="l">Credits Completed</div>
         </div>
         <div class="stat-card">
-          <div class="n">5</div>
+          <div class="n">6</div>
           <div class="l">Projects Built</div>
         </div>
       </div>
@@ -1202,7 +1241,7 @@
       <div class="exp-card reveal">
         <div class="exp-header">
           <div class="exp-title">Freelance Web Developer</div>
-          <div class="exp-badge">2024 – Present</div>
+          <div class="exp-badge">June 2026 – Present</div>
         </div>
         <div class="exp-org">Self-Employed · Remote</div>
         <ul class="exp-bullets">
@@ -1313,6 +1352,25 @@
         </div>
       </div>
 
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-label">Product Management · Django</div>
+          <div class="project-name">ShopManager</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">A product management web app built with Django and SQLite, featuring full CRUD operations, image upload support for products, form validation, and a clean templated UI. Demonstrates applied Django MVT architecture with migrations and media handling.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Django</span>
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">SQLite</span>
+            <span class="stack-tag">HTML/CSS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/IbrahimZihad/ShopManager" target="_blank" class="project-link">↗ GitHub</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1389,6 +1447,9 @@
           <a href="https://facebook.com/ibrahimzihad.zihad" target="_blank" class="social-btn">
             <span>📘</span> Facebook
           </a>
+          <a href="Ibrahim%20Zihad%20Resume.pdf" download class="social-btn cv-download">
+            <span>⬇</span> Download CV
+          </a>
         </div>
       </div>
       <div class="contact-details reveal">
@@ -1403,7 +1464,7 @@
           <div class="contact-item-icon">📱</div>
           <div>
             <div class="contact-item-label">Phone</div>
-            <div class="contact-item-value"><a href="tel:+8801328911249">+880 1328911249</a></div>
+            <div class="contact-item-value"><a href="tel:+8801885434861">+880 1885434861</a></div>
           </div>
         </div>
         <div class="contact-item">
