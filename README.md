@@ -44,7 +44,7 @@ No dependencies. No `npm install`. Just open and go.
 | **About** | Personal bio and quick-stat cards |
 | **Education** | BSc CSE (UIU), HSC (2022), SSC (2018) timeline |
 | **Skills** | Tech stack categorized into Frontend, Backend, Tools, Domains |
-| **Projects** | POTHIK, Subscription Seller, AI E-Learning — with stack tags and links |
+| **Projects** | SubscriptionsBD, LittleLingo AI, Pothik, SmartLibrary, Inventory Management, ShopManager — with stack tags and links |
 | **Achievements** | Frontend Mastery Certificate and academic distinctions |
 | **Activities** | Extracurricular clubs and social/volunteer work |
 | **Contact** | Social links, email, phone, location |
