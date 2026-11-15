@@ -1066,9 +1066,9 @@
         <div class="hero-role">Full Stack Developer</div>
 
         <p class="hero-desc">
-          Building scalable web applications across the full stack.
-          Passionate about clean code, real-world impact, and AI-integrated
-          systems. Final semester CSE student at UIU.
+          Full-stack web developer shipping production systems — from database
+          schema to deployed UI. CSE graduate from UIU (Software Engineering),
+          CGPA 3.93/4.00, with live client work across Sweden and Bangladesh.
         </p>
 
         <div class="hero-actions">
@@ -1089,7 +1089,7 @@
           </div>
 
           <div class="hero-stat">
-            <div class="num">8</div>
+            <div class="num">9</div>
             <div class="label">Projects Built</div>
           </div>
 
@@ -1116,9 +1116,10 @@
       <div class="about-text reveal">
         <p class="section-label">About</p>
         <h2 class="section-title">Who I Am</h2>
-        <p>I'm <strong>Md. Ibrahim Zihad</strong>, a full stack developer and final-semester CSE undergraduate at <strong>United International University</strong>, Dhaka. I build meaningful web products that solve real problems.</p>
-        <p>My stack spans modern frontend with <strong>React.js</strong> and <strong>Next.js</strong>, backend APIs using <strong>Express.js</strong> and <strong>Django REST Framework</strong>, and databases like <strong>MySQL</strong> and <strong>MongoDB</strong>. I'm also passionate about integrating AI — from computer vision to LLMs — into practical applications.</p>
-        <p>With a strong academic record and real freelance experience, I'm eager to contribute to a team that values craft, curiosity, and impact.</p>
+        <p>I'm <strong>Md. Ibrahim Zihad</strong> — a <strong>full-stack web developer</strong> who builds products that actually ship, not demos that stop at the mockup. I take an idea from database schema to deployed interface and stay accountable for it in production.</p>
+        <p>That means live systems for real clients: a <strong>Swedish salon booking platform</strong> with a concurrency-safe availability engine, a <strong>bilingual restaurant POS and PWA</strong>, and a <strong>digital subscription store</strong> handling real payments. Different stacks, same discipline — ship it, secure it, keep it running.</p>
+        <p>My sweet spot is the seam between frontend and backend: <strong>React, Next.js and TypeScript</strong> on the surface; <strong>Node, Express, NestJS or Django</strong> underneath; <strong>MySQL, MongoDB, Prisma and Sequelize</strong> holding it together. I care about the parts users never see — payment webhooks, role-based auth, double-booking prevention, tests that catch what manual QA misses.</p>
+        <p>I graduated from <strong>United International University</strong> with a BSc in CSE, majoring in <strong>Software Engineering</strong>, at <strong>3.93 / 4.00 CGPA</strong>. But the projects below are the real proof — keep scrolling, they say more than a summary can.</p>
       </div>
       <div class="about-stats-block reveal">
         <div class="stat-card">
@@ -1130,7 +1131,7 @@
           <div class="l">Credits Completed</div>
         </div>
         <div class="stat-card">
-          <div class="n">8</div>
+          <div class="n">9</div>
           <div class="l">Projects Built</div>
         </div>
       </div>
@@ -1149,7 +1150,7 @@
         <div>
           <div class="edu-degree">BSc in Computer Science & Engineering</div>
           <div class="edu-school">United International University, Dhaka</div>
-          <div class="edu-detail">CGPA: 3.93 / 4.00 </div>
+          <div class="edu-detail">Major: Software Engineering &nbsp;·&nbsp; CGPA: 3.93 / 4.00 &nbsp;·&nbsp; Graduated</div>
         </div>
         <div class="edu-year">2022 – 2026</div>
       </div>
@@ -1240,7 +1241,33 @@
     <div style="display:flex;flex-direction:column;gap:1.5rem;">
       <div class="exp-card reveal">
         <div class="exp-header">
-          <div class="exp-title">Freelance Web Developer</div>
+          <div class="exp-title">Freelance Full-Stack Developer — Saloon Sweden</div>
+          <div class="exp-badge">2026</div>
+        </div>
+        <div class="exp-org">Self-Employed · Remote · Live at saloon-sweden.vercel.app</div>
+        <ul class="exp-bullets">
+          <li>Built and shipped a production salon website with a 6-step online booking wizard and a full admin dashboard for a Swedish client — Next.js 15, React 19, TypeScript, Express 5 and MySQL/Sequelize.</li>
+          <li>Engineered a concurrency-safe availability engine that respects opening hours, staff schedules, breaks, holidays and time off, prevents double bookings, and revalidates every booking server-side with DST-correct Europe/Stockholm time.</li>
+          <li>Delivered JWT role-based auth (ADMIN / STAFF), a database-backed retrying email queue, live admin booking alerts with Swedish speech synthesis, and Swedish/English GDPR-aware content with data export and erasure.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div class="exp-title">Freelance Full-Stack Developer — Dhaka Hotel</div>
+          <div class="exp-badge">2026</div>
+        </div>
+        <div class="exp-org">Self-Employed · Remote · Live at dhakahotel.onrender.com</div>
+        <ul class="exp-bullets">
+          <li>Delivered a bilingual (Bangla / English) restaurant platform in plain PHP 8.2 and MySQL — customer storefront, 18 admin screens, a single-screen POS and an installable PWA, with no framework or build step.</li>
+          <li>Implemented idempotent guest checkout, order tracking by reference, 58 mm / 80 mm / A4 receipt printing, enforced order-status transitions, separate payment and refund records, and CSV reporting.</li>
+          <li>Hardened every write path with PDO prepared statements, CSRF tokens, output escaping, CSP headers, rate-limited admin login and validated image uploads.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div class="exp-title">Freelance Web Developer — DexxoxxBD</div>
           <div class="exp-badge">June 2026 – Present</div>
         </div>
         <div class="exp-org">Self-Employed · Remote</div>
@@ -1312,6 +1339,27 @@
           <div class="project-links">
             <a href="https://saloon-sweden.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link">↗ Live Demo</a>
             <a href="https://github.com/IbrahimZihad/saloon-sweden" target="_blank" rel="noopener noreferrer" class="project-link">↗ GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-label">Restaurant, POS & PWA · Freelance</div>
+          <div class="project-name">Dhaka Hotel</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">A bilingual (Bangla / English) restaurant system built in plain PHP 8.2 and MySQL — no framework, no bundler. Customers browse the menu, order as guests and track deliveries; the owner runs 18 admin screens, a single-screen POS with receipt printing, payment and refund records, moderation and CSV reports. Ships as an installable PWA with CSRF-protected writes, CSP headers and rate-limited admin login.</p>
+          <div class="project-stack">
+            <span class="stack-tag">PHP 8.2</span>
+            <span class="stack-tag">MySQL</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">PWA</span>
+            <span class="stack-tag">HTML/CSS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://dhakahotel.onrender.com/" target="_blank" rel="noopener noreferrer" class="project-link">↗ Live Demo</a>
+            <a href="https://github.com/IbrahimZihad/DhakaHotel" target="_blank" rel="noopener noreferrer" class="project-link">↗ GitHub</a>
           </div>
         </div>
       </div>
@@ -1476,8 +1524,8 @@
       <div class="achieve-card reveal">
         <div class="achieve-icon">🎓</div>
         <div class="achieve-title">Top University CGPA</div>
-        <div class="achieve-desc">Maintaining a CGPA of 3.94 out of 4.00 with 126 credits completed in the BSc Computer Science & Engineering program at United International University.</div>
-        <div class="achieve-badge">CGPA 3.94 / 4.00</div>
+        <div class="achieve-desc">Graduated with a CGPA of 3.93 out of 4.00 and 126 credits completed in the BSc Computer Science & Engineering program at United International University, majoring in Software Engineering.</div>
+        <div class="achieve-badge">CGPA 3.93 / 4.00</div>
       </div>
       <div class="achieve-card reveal">
         <div class="achieve-icon">🥇</div>
