@@ -43,7 +43,7 @@ No dependencies. No `npm install`. Just open and go.
 | **Hero** | Name, role, short tagline, CTA buttons, and key stats |
 | **About** | Personal bio and quick-stat cards |
 | **Education** | BSc CSE (UIU), HSC (2022), SSC (2018) timeline |
-| **Skills** | Tech stack categorized into Frontend, Backend, Tools, Domains |
+| **Skills** | Tech stack grouped into Frontend, Backend, Databases & ORMs, DevOps & Testing, Payments & Integrations, AI & Modern Web |
 | **Projects** | CakeFlow (My Sweet Desserts), Saloon Sweden, Dhaka Hotel, SubscriptionsBD, LittleLingo AI, Pothik, SmartLibrary, Inventory Management, ShopManager — with stack tags and links |
 | **Achievements** | Frontend Mastery Certificate and academic distinctions |
 | **Activities** | Extracurricular clubs and social/volunteer work |
