@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Md. Ibrahim Zihad monogram">
+  <defs>
+    <linearGradient id="miz-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#111827" />
+  <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#1f2937" />
+  <path fill="url(#miz-grad)" d="M14 48V16h7.6L32 33.4 42.4 16H50v32h-7.4V29.6L34.3 44h-4.6L21.4 29.6V48z" />
+</svg>

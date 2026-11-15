@@ -18,6 +18,9 @@ The design follows a **Bento Grid & Architectural Slate** direction: a modular c
 portfolio/
 ├── index.html                  # Single-file portfolio (HTML + CSS + JS)
 ├── profile.jpg                 # Hero portrait
+├── og-image.png                # 1200×630 social share card (Open Graph / Twitter)
+├── favicon.svg                 # Gradient monogram favicon
+├── apple-touch-icon.png        # 180×180 iOS home-screen icon
 ├── Ibrahim Zihad Resume.pdf    # CV served by the download buttons
 └── README.md
 ```
@@ -40,6 +43,7 @@ No dependencies. No `npm install`. Just open and go.
 - **Interactive hover states** — cards lift, glow and shift their border colour
 - **Architectural background** — fixed grid pattern plus ambient radial glows
 - **Reduced-motion support** — animations collapse when the OS requests it
+- **SEO & social metadata** — description, canonical, Open Graph, Twitter card, theme colour and `Person` JSON-LD
 - **No external dependencies** — only Google Fonts via CDN
 
 ---
@@ -141,6 +145,23 @@ Each project card has a label, title, description, a chip list and link anchors:
 <a href="https://example.com" class="link">↗ Live Demo</a>
 <a href="https://github.com/user/repo" class="link">↗ GitHub</a>
 ```
+
+### Update the site URL (Open Graph / canonical)
+
+The absolute URL appears in the `<head>` and must match your deployment domain. Replace it in one pass:
+
+```html
+<link rel="canonical" href="https://myportfolio-nine-blond-83.vercel.app/" />
+<meta property="og:url" content="https://myportfolio-nine-blond-83.vercel.app/" />
+<meta property="og:image" content="https://myportfolio-nine-blond-83.vercel.app/og-image.png" />
+<meta name="twitter:image" content="https://myportfolio-nine-blond-83.vercel.app/og-image.png" />
+```
+
+Also update `"url"` and `"image"` inside the `application/ld+json` block.
+
+### Update the social share image
+
+`og-image.png` is a 1200×630 card. To change the text or portrait, edit the source HTML used to render it, or simply replace the file — keep the 1200×630 size and the same filename so the meta tags keep working.
 
 ### Change the colour theme
 
