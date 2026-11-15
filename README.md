@@ -1,12 +1,14 @@
 # 🌐 Md. Ibrahim Zihad — Developer Portfolio
 
-A personal portfolio website for **Md. Ibrahim Zihad**, a beginner-level full stack developer and BSc CSE student (Software Engineering) at United International University. Built entirely with **HTML, CSS, and vanilla JavaScript** — no frameworks, no build tools, just one clean file.
+A personal portfolio for **Md. Ibrahim Zihad**, a full-stack web developer and BSc CSE graduate (Software Engineering) from United International University. Built entirely with **HTML, CSS and vanilla JavaScript** — no frameworks, no build tools, just one clean file.
+
+The design follows a **Bento Grid & Architectural Slate** direction: a modular card dashboard with a deep midnight-slate background, subtle steel borders and electric sky-blue accents.
 
 ---
 
 ## 📸 Preview
 
-> Open `portfolio.html` directly in any modern browser to preview.
+> Open `index.html` directly in any modern browser to preview.
 
 ---
 
@@ -14,7 +16,10 @@ A personal portfolio website for **Md. Ibrahim Zihad**, a beginner-level full st
 
 ```
 portfolio/
-└── portfolio.html      # Single-file portfolio (HTML + CSS + JS)
+├── index.html                  # Single-file portfolio (HTML + CSS + JS)
+├── profile.jpg                 # Hero portrait
+├── Ibrahim Zihad Resume.pdf    # CV served by the download buttons
+└── README.md
 ```
 
 No dependencies. No `npm install`. Just open and go.
@@ -23,16 +28,19 @@ No dependencies. No `npm install`. Just open and go.
 
 ## ✨ Features
 
-- **Single-file** — everything lives in one `portfolio.html`
-- **Fully responsive** — works on mobile, tablet, and desktop
-- **Smooth scroll** — native CSS scroll behavior with JS anchor handling
-- **Scroll-reveal animations** — sections animate in using IntersectionObserver
-- **Sticky navbar** — shrinks on scroll, active on all viewports
-- **Mobile hamburger menu** — full-screen overlay nav for small screens
-- **Dark theme** — deep dark background with indigo/purple accent palette
-- **Noise texture overlay** — subtle SVG noise for depth
-- **Grid hero background** — decorative CSS grid pattern in the hero section
-- **No external dependencies** — only Google Fonts loaded via CDN
+- **Single file** — all markup, styles and scripts live in `index.html`
+- **Fully responsive** — mobile-first bento grid that reflows at 680px, 720px and 1040px
+- **Bento grid layout** — 12-column CSS grid with `span-3` … `span-12` card utilities
+- **Scroll progress bar** — gradient indicator at the top of the page
+- **Scrollspy navigation** — the active section is underlined as you scroll
+- **Scroll-reveal animations** — cards fade and lift in via `IntersectionObserver`
+- **Sticky glass navbar** — blurred background, denser on scroll
+- **Mobile hamburger menu** — full-screen overlay nav with body-scroll lock
+- **Live status indicators** — pulsing emerald dot for "available / live" badges
+- **Interactive hover states** — cards lift, glow and shift their border colour
+- **Architectural background** — fixed grid pattern plus ambient radial glows
+- **Reduced-motion support** — animations collapse when the OS requests it
+- **No external dependencies** — only Google Fonts via CDN
 
 ---
 
@@ -40,14 +48,15 @@ No dependencies. No `npm install`. Just open and go.
 
 | Section | Description |
 |---|---|
-| **Hero** | Name, role, short tagline, CTA buttons, and key stats |
-| **About** | Personal bio and quick-stat cards |
-| **Education** | BSc CSE (UIU), HSC (2022), SSC (2018) timeline |
-| **Skills** | Tech stack grouped into Frontend, Backend, Databases & ORMs, DevOps & Testing, Payments & Integrations, AI & Modern Web |
-| **Projects** | CakeFlow (My Sweet Desserts), Saloon Sweden, Dhaka Hotel, SubscriptionsBD, LittleLingo AI, Pothik, SmartLibrary, Inventory Management, ShopManager — with stack tags and links |
-| **Achievements** | Frontend Mastery Certificate and academic distinctions |
-| **Activities** | Extracurricular clubs and social/volunteer work |
-| **Contact** | Social links, email, phone, location |
+| **Hero** | Name, role, tagline, CTA buttons, portrait card and four metric cards (CGPA, projects, live systems, HSC/SSC GPA) |
+| **About** | Personal bio plus compact skill cards (Frontend, Backend, Data & ORMs, Tools) |
+| **Education** | BSc CSE (UIU, 3.93/4.00, Software Engineering major), HSC (2020), SSC (2018) |
+| **Stack** | Six skill cards: Frontend, Backend, Databases & ORMs, DevOps & Testing, Payments & Integrations, AI & Modern Web |
+| **Experience** | Saloon Sweden, Dhaka Hotel and DexxoxxBD freelance engagements |
+| **Projects** | CakeFlow, Saloon Sweden, Dhaka Hotel, SubscriptionsBD, LittleLingo AI, Pothik, SmartLibrary, Inventory Management, ShopManager — with stack chips and live/GitHub links |
+| **Certifications** | Frontend Mastery (CDIP, UIU) and the Ostad full-stack course in progress |
+| **Achievements** | CGPA 3.93/4.00 plus perfect 5.00 HSC and SSC results |
+| **Contact** | Social links, email, phone, location, university and CV download |
 
 ---
 
@@ -55,18 +64,22 @@ No dependencies. No `npm install`. Just open and go.
 
 | Token | Value | Usage |
 |---|---|---|
-| `--bg` | `#0a0a0f` | Page background |
-| `--surface` | `#111118` | Section/card background |
-| `--surface2` | `#1a1a24` | Nested card background |
-| `--primary` | `#a78bfa` | Indigo/violet accent |
-| `--accent` | `#38bdf8` | Sky blue secondary accent |
-| `--gold` | `#fbbf24` | Achievement badges |
-| `--text` | `#e8e8f0` | Primary text |
-| `--muted` | `#6b6b8a` | Secondary/muted text |
+| `--bg` | `#090d16` | Deep midnight slate page background |
+| `--surface` | `#111827` | Elevated slate card surface |
+| `--surface-2` | `#0e1522` | Card gradient end stop |
+| `--border` | `#1f2937` | Subtle steel card border |
+| `--accent` | `#38bdf8` | Electric sky-blue primary accent |
+| `--accent-2` | `#34d399` | Emerald secondary accent (live status) |
+| `--text` | `#f9fafb` | Primary text |
+| `--muted` | `#9ca3af` | Secondary / muted text |
+| `--radius` | `16px` | Card corner radius (14px on mobile) |
+| `--mono` | `JetBrains Mono` | Stack tags, endpoints, metrics |
+| `--display` | `Plus Jakarta Sans` | Headings |
 
 **Fonts (Google Fonts):**
-- Display / Headings: `Syne` (400, 600, 700, 800)
-- Body: `DM Sans` (300, 400, 500)
+- Display / headings: `Plus Jakarta Sans` (500–800)
+- Body: `Inter` (300–600)
+- Technical labels, chips, metrics: `JetBrains Mono` (400–600)
 
 ---
 
@@ -75,7 +88,7 @@ No dependencies. No `npm install`. Just open and go.
 | Layer | Technology |
 |---|---|
 | Markup | HTML5 |
-| Styling | CSS3 (custom properties, grid, flexbox, animations) |
+| Styling | CSS3 (custom properties, grid, flexbox, gradients, animations) |
 | Interactivity | Vanilla JavaScript (ES6+) |
 | Fonts | Google Fonts CDN |
 
@@ -85,16 +98,14 @@ No dependencies. No `npm install`. Just open and go.
 
 ### View Locally
 
-Just open the file in your browser:
-
 ```bash
 # Clone or download the repo, then:
-open portfolio.html          # macOS
-start portfolio.html         # Windows
-xdg-open portfolio.html      # Linux
+start index.html         # Windows
+open index.html          # macOS
+xdg-open index.html      # Linux
 ```
 
-Or drag and drop `portfolio.html` into any browser tab.
+Or drag and drop `index.html` into any browser tab.
 
 ### Deploy
 
@@ -103,49 +114,59 @@ Since it's a single HTML file, it can be deployed anywhere static files are serv
 | Platform | How |
 |---|---|
 | **GitHub Pages** | Push to a repo → Settings → Pages → Deploy from branch |
-| **Netlify** | Drag and drop the file on netlify.com/drop |
+| **Netlify** | Drag and drop the folder on netlify.com/drop |
 | **Vercel** | `vercel --prod` in the project folder |
-| **Any web host** | Upload `portfolio.html` to the root directory |
+| **Any web host** | Upload `index.html` to the root directory |
 
 ---
 
 ## ✏️ Customization Guide
 
-All editable content is in the HTML body. No config files, no JS data objects — just find and update the text directly.
+All editable content lives in the HTML body. No config files, no JS data objects — just find and update the text directly.
 
 ### Update personal info
-Search for placeholder values and replace:
 
 ```
-your.email@example.com      → your real email
-+880 1X XXX XXXXX           → your phone number
-https://github.com          → your GitHub profile URL
-https://linkedin.com        → your LinkedIn profile URL
-https://facebook.com        → your Facebook profile URL
-https://twitter.com         → your Twitter/X profile URL
+ibrahimzihad5@gmail.com                      → your email
++880 1885434861                              → your phone number
+https://github.com/IbrahimZihad               → your GitHub profile
+https://linkedin.com/in/ibrahim-zihad-…       → your LinkedIn profile
 ```
 
-### Update project links
-Each project card has two anchor tags:
+### Update project cards
+
+Each project card has a label, title, description, a chip list and link anchors:
 
 ```html
-<a href="#" class="project-link">↗ Live Demo</a>
-<a href="#" class="project-link">↗ GitHub</a>
+<a href="https://example.com" class="link">↗ Live Demo</a>
+<a href="https://github.com/user/repo" class="link">↗ GitHub</a>
 ```
 
-Replace `#` with the actual URLs.
+### Change the colour theme
 
-### Change the color theme
 Edit the CSS variables in `:root` at the top of the `<style>` block:
 
 ```css
 :root {
-  --primary: #a78bfa;   /* change to any color */
-  --accent:  #38bdf8;   /* change secondary accent */
+  --accent:   #38bdf8;  /* primary accent */
+  --accent-2: #34d399;  /* secondary accent / live status */
+  --surface:  #111827;  /* card background */
 }
 ```
 
+### Change card widths
+
+Cards use 12-column span utilities:
+
+```html
+<article class="card span-4">…</article>   <!-- 4 of 12 columns -->
+<article class="card span-8">…</article>   <!-- 8 of 12 columns -->
+```
+
+Spans collapse to full width on mobile automatically.
+
 ### Add a new section
+
 1. Add a `<section id="new-section">` block in the HTML body
 2. Add a nav link: `<li><a href="#new-section">New</a></li>`
 3. Add the same link to the mobile menu
@@ -156,9 +177,11 @@ Edit the CSS variables in `:root` at the top of the `<style>` block:
 
 | Breakpoint | Behaviour |
 |---|---|
-| `> 900px` | Full desktop layout, horizontal nav |
-| `≤ 900px` | Nav hidden, hamburger shown; single-column grids |
-| `≤ 600px` | Reduced padding, all grids collapse to 1 column |
+| `≥ 1040px` | Full desktop bento: 3- and 4-column card rows, horizontal nav |
+| `720px – 1039px` | Two-column bento, hero photo becomes a full-width banner, stats line up 4-across |
+| `≤ 900px` | Nav collapses into the hamburger menu |
+| `≤ 680px` | Single column, tighter padding, full-width buttons |
+| `≤ 400px` | Smaller portrait and chip typography |
 
 ---
 
@@ -166,10 +189,11 @@ Edit the CSS variables in `:root` at the top of the `<style>` block:
 
 All JS is at the bottom of the file in a single `<script>` block:
 
-- **Nav shrink on scroll** — toggles `.scrolled` class after 40px
-- **Hamburger toggle** — opens/closes full-screen mobile menu, locks body scroll
-- **Scroll-reveal** — `IntersectionObserver` watches `.reveal` elements, adds `.visible` class with staggered delay
-- **Smooth scroll** — intercepts `<a href="#...">` clicks for smooth in-page navigation
+- **Scroll progress** — computes document scroll percentage into a gradient top bar
+- **Nav state** — adds `.scrolled` styling past 24px and highlights the active section link
+- **Hamburger toggle** — opens/closes the full-screen mobile menu and locks body scroll
+- **Scroll reveal** — `IntersectionObserver` adds `.visible` to `.reveal` cards with a staggered delay
+- **Smooth scroll** — intercepts `<a href="#…">` clicks and respects the fixed-nav offset
 
 ---
 
