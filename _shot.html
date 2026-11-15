@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Md. Ibrahim Zihad — Full Stack Developer</title>
+  <meta name="description" content="Full-stack web developer shipping production systems — React, Next.js, TypeScript, Node, NestJS, PHP and MySQL." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-2: #0e1522;
+      --border: #1f2937;
+      --accent: #38bdf8;
+      --accent-2: #34d399;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      --radius: 16px;
+      --shadow: 0 24px 60px -30px rgba(56, 189, 248, 0.45);
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Architectural grid + ambient glows */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 70%);
+      mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 70%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 520px at 88% -8%, rgba(56, 189, 248, 0.10), transparent 62%),
+        radial-gradient(820px 520px at 2% 12%, rgba(52, 211, 153, 0.07), transparent 62%),
+        radial-gradient(760px 520px at 50% 105%, rgba(56, 189, 248, 0.06), transparent 62%);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    ul { list-style: none; }
+
+    ::selection { background: rgba(56, 189, 248, 0.28); color: #fff; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0b1019; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      border-radius: 8px;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--display); letter-spacing: -0.02em; line-height: 1.12; }
+    .mono { font-family: var(--mono); }
+
+    /* ---------- Layout ---------- */
+    .wrap { width: min(1180px, calc(100% - 2.5rem)); margin-inline: auto; }
+
+    section { position: relative; z-index: 1; padding: 5rem 0; scroll-margin-top: 84px; }
+
+    .section-head { max-width: 680px; margin-bottom: 2.25rem; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .kicker::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 800;
+      margin: 0.7rem 0 0.75rem;
+    }
+
+    .section-sub { color: var(--muted); font-size: 0.98rem; }
+
+    /* ---------- Nav ---------- */
+    #scrollProgress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0;
+      z-index: 120;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+      transition: width 0.1s linear;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(31, 41, 55, 0.85);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(9, 13, 22, 0.92);
+      box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.9);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo b { color: var(--accent); font-weight: 600; }
+
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+
+    .nav-links a {
+      position: relative;
+      font-size: 0.84rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.35rem 0;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+
+    .nav-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #04121c !important;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      padding: 0.5rem 0.95rem;
+      border-radius: 9px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .nav-links a.nav-cv { padding: 0.5rem 0.95rem; font-size: 0.8rem; }
+    .nav-links a.nav-cv::after { display: none; }
+
+    .nav-cv:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -10px rgba(56, 189, 248, 0.7); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: 0;
+      padding: 8px;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.75rem;
+      background: rgba(9, 13, 22, 0.98);
+      backdrop-filter: blur(20px);
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.72rem 1.2rem;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s, color 0.25s, background 0.25s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #04121c;
+      font-weight: 700;
+      box-shadow: 0 10px 26px -12px rgba(56, 189, 248, 0.8);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -14px rgba(56, 189, 248, 0.9); }
+
+    .btn-ghost {
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover { border-color: rgba(56, 189, 248, 0.5); color: var(--accent); transform: translateY(-2px); }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    /* ---------- Bento system ---------- */
+    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.1rem; }
+
+    [class*='span-'] { grid-column: span 12; }
+
+    @media (min-width: 720px) {
+      .span-3, .span-4, .span-5, .span-6 { grid-column: span 6; }
+    }
+
+    @media (min-width: 1040px) {
+      .span-3 { grid-column: span 3; }
+      .span-4 { grid-column: span 4; }
+      .span-5 { grid-column: span 5; }
+      .span-6 { grid-column: span 6; }
+      .span-7 { grid-column: span 7; }
+      .span-8 { grid-column: span 8; }
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -55%;
+      right: -25%;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.16), transparent 68%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    /* ---------- Badges / chips ---------- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.32rem 0.7rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .badge-live {
+      color: var(--accent-2);
+      border-color: rgba(52, 211, 153, 0.32);
+      background: rgba(52, 211, 153, 0.08);
+    }
+
+    .badge-accent {
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.32);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.82); }
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.24rem 0.55rem;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.022);
+      color: #cbd5e1;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+
+    .chip:hover {
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.42);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding-top: 8.5rem; padding-bottom: 3.5rem; }
+
+    .hero-main { display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .hero h1 { font-size: clamp(2.35rem, 6.2vw, 4.3rem); font-weight: 800; line-height: 1.02; }
+
+    .grad {
+      background: linear-gradient(100deg, var(--accent) 10%, var(--accent-2) 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .role {
+      font-family: var(--mono);
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .lead { color: var(--muted); font-size: 1rem; max-width: 58ch; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.35rem; }
+
+    .terminal {
+      margin-top: 0.6rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .terminal b { color: var(--accent-2); font-weight: 500; }
+
+    .hero-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.25rem;
+    }
+
+    .photo-frame {
+      width: 100%;
+      max-width: 250px;
+      padding: 2px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.85), rgba(52, 211, 153, 0.85));
+      box-shadow: 0 20px 50px -24px rgba(56, 189, 248, 0.8);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 13px;
+      background: var(--surface);
+    }
+
+    .photo-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+
+    .stat { display: flex; flex-direction: column; justify-content: center; gap: 0.3rem; }
+
+    .stat .num {
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 3vw, 2.15rem);
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .stat .lbl {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------- About ---------- */
+    .about-text p { color: var(--muted); font-size: 0.94rem; line-height: 1.85; margin-bottom: 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+    .about-side { display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .mini-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+
+    .mini {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.95rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .mini:hover { border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.04); }
+
+    .mini h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.65rem;
+    }
+
+    .mini h4::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      flex-shrink: 0;
+    }
+
+    .mini .chip { font-size: 0.64rem; padding: 0.2rem 0.45rem; }
+
+    .highlight-strip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(52, 211, 153, 0.26);
+      background: rgba(52, 211, 153, 0.055);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent-2);
+    }
+
+    /* ---------- Education ---------- */
+    .edu { display: flex; flex-direction: column; gap: 0.55rem; }
+
+    .edu .yr {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+
+    .edu h3 { font-size: 1.02rem; font-weight: 700; line-height: 1.35; }
+    .edu .school { color: var(--muted); font-size: 0.85rem; }
+    .edu .meta { margin-top: auto; padding-top: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    /* ---------- Skills ---------- */
+    .skill { display: flex; flex-direction: column; gap: 0.9rem; }
+
+    .skill-head { display: flex; align-items: center; gap: 0.7rem; }
+
+    .skill-ic {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+    }
+
+    .skill h3 { font-size: 0.98rem; font-weight: 700; }
+
+    /* ---------- Experience ---------- */
+    .exp { padding-left: 1.9rem; }
+
+    .exp::after {
+      content: '';
+      position: absolute;
+      left: 0.85rem;
+      top: 1.6rem;
+      bottom: 1.6rem;
+      width: 2px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      opacity: 0.45;
+      transition: opacity 0.3s;
+    }
+
+    .exp:hover::after { opacity: 1; }
+
+    .exp-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.45rem;
+    }
+
+    .exp h3 { font-size: 1.05rem; font-weight: 700; }
+
+    .exp .org {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-top: 0.35rem;
+      overflow-wrap: anywhere;
+    }
+
+    .exp ul { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 0.95rem; }
+
+    .exp li {
+      position: relative;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.75;
+    }
+
+    .exp li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-2);
+    }
+
+    .exp li strong { color: var(--text); font-weight: 600; }
+    .exp li a { color: var(--accent); text-decoration: none; }
+    .exp li a:hover { text-decoration: underline; }
+
+    /* ---------- Projects ---------- */
+    .proj { display: flex; flex-direction: column; gap: 0.85rem; }
+
+    .proj-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.6rem; }
+
+    .proj .lbl {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .proj .idx {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: rgba(156, 163, 175, 0.55);
+      flex-shrink: 0;
+    }
+
+    .proj h3 { font-size: 1.15rem; font-weight: 800; transition: color 0.25s; }
+    .proj:hover h3 { color: var(--accent); }
+
+    .proj p { color: var(--muted); font-size: 0.84rem; line-height: 1.75; flex: 1; }
+
+    .proj .chips { margin-top: auto; }
+
+    .links { display: flex; flex-wrap: wrap; gap: 1.1rem; padding-top: 0.35rem; }
+
+    .link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .link:hover { color: var(--accent-2); transform: translateX(2px); }
+
+    /* ---------- Certifications / Achievements ---------- */
+    .cert { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .cert-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; }
+
+    .cert h3 { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+    .cert .issuer { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); }
+    .cert p { color: var(--muted); font-size: 0.84rem; line-height: 1.75; }
+
+    .achv { display: flex; flex-direction: column; gap: 0.55rem; }
+
+    .achv .num {
+      font-family: var(--display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .achv h3 { font-size: 0.95rem; font-weight: 700; }
+    .achv p { color: var(--muted); font-size: 0.82rem; line-height: 1.7; }
+
+    /* ---------- Contact ---------- */
+    .contact-left { display: flex; flex-direction: column; gap: 1.1rem; }
+    .contact-left p { color: var(--muted); font-size: 0.94rem; line-height: 1.8; }
+
+    .socials { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+
+    .social {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 0.9rem;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+    }
+
+    .social:hover { border-color: rgba(56, 189, 248, 0.45); color: var(--accent); transform: translateY(-2px); }
+
+    .social.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+      color: #04121c;
+      font-weight: 700;
+    }
+
+    .social.primary:hover { color: #04121c; box-shadow: 0 12px 26px -12px rgba(56, 189, 248, 0.8); }
+
+    .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; }
+
+    .tile {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .tile:hover { border-color: rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.04); }
+
+    .tile .ic {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      background: rgba(56, 189, 248, 0.09);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+    }
+
+    .tile .k {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .tile .v { font-size: 0.84rem; font-weight: 600; overflow-wrap: anywhere; }
+    .tile .v a { text-decoration: none; }
+    .tile .v a:hover { color: var(--accent); }
+
+    /* ---------- Footer ---------- */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .footer-inner b { color: var(--accent); font-weight: 500; }
+
+    /* ---------- Motion ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 3.75rem 0; }
+      .hero { padding-top: 7rem; }
+    }
+
+    @media (max-width: 680px) {
+      .wrap { width: calc(100% - 1.75rem); }
+      .card { padding: 1.25rem; border-radius: 14px; }
+      .hero h1 { font-size: clamp(2.1rem, 10vw, 2.9rem); }
+      .lead { font-size: 0.94rem; }
+      .actions .btn { flex: 1 1 100%; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .tiles { grid-template-columns: 1fr; }
+      .exp { padding-left: 1.6rem; }
+      .exp::after { left: 0.65rem; }
+      .footer-inner { justify-content: center; text-align: center; }
+      .section-title { font-size: clamp(1.6rem, 7vw, 2.1rem); }
+    }
+
+    @media (max-width: 400px) {
+      .photo-frame { max-width: 200px; }
+      .badge { font-size: 0.62rem; }
+      .chip { font-size: 0.63rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">MIZ<b>.</b></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Stack</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#achievements">Awards</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="Ibrahim%20Zihad%20Resume.pdf" download class="nav-cv">↓ CV</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mm-link">About</a>
+  <a href="#education" class="mm-link">Education</a>
+  <a href="#skills" class="mm-link">Stack</a>
+  <a href="#experience" class="mm-link">Experience</a>
+  <a href="#projects" class="mm-link">Projects</a>
+  <a href="#certifications" class="mm-link">Certs</a>
+  <a href="#achievements" class="mm-link">Awards</a>
+  <a href="#contact" class="mm-link">Contact</a>
+  <a href="Ibrahim%20Zihad%20Resume.pdf" download class="mm-link nav-cv">↓ Download CV</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap bento">
+
+    <article class="card span-8 hero-main reveal">
+      <div class="hero-badges">
+        <span class="badge badge-live"><span class="dot"></span>Available for opportunities</span>
+        <span class="badge">Dhaka, BD · Remote</span>
+      </div>
+
+      <h1>Md. Ibrahim<br /><span class="grad">Zihad</span></h1>
+      <div class="role">Full Stack Developer</div>
+
+      <p class="lead">
+        Full-stack web developer shipping production systems — from database schema
+        to deployed UI. CSE graduate from UIU (Software Engineering), CGPA 3.93/4.00,
+        with live client work across Sweden and Bangladesh.
+      </p>
+
+      <div class="actions">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        <a href="Ibrahim%20Zihad%20Resume.pdf" download class="btn btn-ghost">↓ Download CV</a>
+      </div>
+
+      <div class="terminal">
+        <b>$</b> stack --core &nbsp;React · Next.js · TypeScript · Node · NestJS · PHP · MySQL
+      </div>
+    </article>
+
+    <article class="card span-4 hero-photo reveal">
+      <div class="photo-frame">
+        <img src="profile.jpg" alt="Md. Ibrahim Zihad" />
+      </div>
+      <div class="photo-meta">
+        <span class="badge badge-accent">Open to work</span>
+        <span class="badge">BSc CSE · SE</span>
+      </div>
+    </article>
+
+    <article class="card span-3 stat reveal">
+      <div class="num">3.93<span style="font-size:1rem;">/4.00</span></div>
+      <div class="lbl">CGPA</div>
+    </article>
+
+    <article class="card span-3 stat reveal">
+      <div class="num">9</div>
+      <div class="lbl">Projects Built</div>
+    </article>
+
+    <article class="card span-3 stat reveal">
+      <div class="num">3</div>
+      <div class="lbl">Live Client Systems</div>
+    </article>
+
+    <article class="card span-3 stat reveal">
+      <div class="num">5.00<span style="font-size:1rem;">/5.00</span></div>
+      <div class="lbl">HSC &amp; SSC GPA</div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">01 — About</span>
+      <h2 class="section-title">Who I Am</h2>
+      <p class="section-sub">A builder first — the résumé just keeps score.</p>
+    </header>
+
+    <div class="bento">
+      <article class="card span-7 about-text reveal">
+        <p>I'm <strong>Md. Ibrahim Zihad</strong> — a <strong>full-stack web developer</strong> who builds products that actually ship, not demos that stop at the mockup. I take an idea from database schema to deployed interface and stay accountable for it in production.</p>
+        <p>That means live systems for real clients: a <strong>Swedish salon booking platform</strong> with a concurrency-safe availability engine, a <strong>bilingual restaurant POS and PWA</strong>, and a <strong>digital subscription store</strong> handling real payments. Different stacks, same discipline — ship it, secure it, keep it running.</p>
+        <p>My sweet spot is the seam between frontend and backend: <strong>React, Next.js and TypeScript</strong> on the surface; <strong>Node, Express, NestJS or Django</strong> underneath; <strong>MySQL, MongoDB, Prisma and Sequelize</strong> holding it together. I care about the parts users never see — payment webhooks, role-based auth, double-booking prevention, tests that catch what manual QA misses.</p>
+        <p>I graduated from <strong>United International University</strong> with a BSc in CSE, majoring in <strong>Software Engineering</strong>, at <strong>3.93 / 4.00 CGPA</strong>. But the projects below are the real proof — keep scrolling, they say more than a summary can.</p>
+      </article>
+
+      <div class="span-5 about-side reveal">
+        <div class="mini-grid">
+          <div class="mini">
+            <h4>Frontend</h4>
+            <div class="chips">
+              <span class="chip">React.js</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Tailwind</span>
+            </div>
+          </div>
+          <div class="mini">
+            <h4>Backend</h4>
+            <div class="chips">
+              <span class="chip">Node.js</span>
+              <span class="chip">Express</span>
+              <span class="chip">NestJS</span>
+              <span class="chip">Django</span>
+            </div>
+          </div>
+          <div class="mini">
+            <h4>Data &amp; ORMs</h4>
+            <div class="chips">
+              <span class="chip">MySQL</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Prisma</span>
+              <span class="chip">Sequelize</span>
+            </div>
+          </div>
+          <div class="mini">
+            <h4>Tools</h4>
+            <div class="chips">
+              <span class="chip">Docker</span>
+              <span class="chip">Git</span>
+              <span class="chip">JWT / RBAC</span>
+              <span class="chip">Stripe</span>
+            </div>
+          </div>
+        </div>
+        <div class="highlight-strip">
+          <span class="dot"></span>Currently building with Next.js 15 · NestJS · Prisma · Stripe
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">02 — Education</span>
+      <h2 class="section-title">Academic Background</h2>
+      <p class="section-sub">A consistent record of excellence from school through university.</p>
+    </header>
+
+    <div class="bento">
+      <article class="card span-4 edu reveal">
+        <span class="yr">2022 — 2026 · Graduated</span>
+        <h3>BSc in Computer Science &amp; Engineering</h3>
+        <div class="school">United International University, Dhaka</div>
+        <div class="meta">
+          <span class="badge badge-accent">Major: Software Engineering</span>
+          <span class="badge badge-live">CGPA 3.93 / 4.00</span>
+        </div>
+      </article>
+
+      <article class="card span-4 edu reveal">
+        <span class="yr">2020 · HSC</span>
+        <h3>Higher Secondary Certificate</h3>
+        <div class="school">Birshrestha Noor Muhammad Public College</div>
+        <div class="meta">
+          <span class="badge badge-live">GPA 5.00 / 5.00</span>
+        </div>
+      </article>
+
+      <article class="card span-4 edu reveal">
+        <span class="yr">2018 · SSC</span>
+        <h3>Secondary School Certificate</h3>
+        <div class="school">Ghatail Cantonment Public School and College</div>
+        <div class="meta">
+          <span class="badge badge-live">GPA 5.00 / 5.00</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">03 — Stack</span>
+      <h2 class="section-title">Tech Stack &amp; Tools</h2>
+      <p class="section-sub">The toolchain behind the live systems below.</p>
+    </header>
+
+    <div class="bento">
+      <article class="card span-4 skill reveal">
+        <div class="skill-head"><span class="skill-ic">🎨</span><h3>Frontend</h3></div>
+        <div class="chips">
+          <span class="chip">React.js</span>
+          <span class="chip">Next.js</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">HTML5 / CSS3</span>
+        </div>
+      </article>
+
+      <article class="card span-4 skill reveal">
+        <div class="skill-head"><span class="skill-ic">⚙️</span><h3>Backend</h3></div>
+        <div class="chips">
+          <span class="chip">Node.js</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">NestJS</span>
+          <span class="chip">Django</span>
+          <span class="chip">PHP 8</span>
+          <span class="chip">REST / OpenAPI</span>
+        </div>
+      </article>
+
+      <article class="card span-4 skill reveal">
+        <div class="skill-head"><span class="skill-ic">🗄️</span><h3>Databases &amp; ORMs</h3></div>
+        <div class="chips">
+          <span class="chip">MySQL</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">Prisma</span>
+          <span class="chip">Sequelize</span>
+          <span class="chip">Redis</span>
+          <span class="chip">SQL</span>
+        </div>
+      </article>
+
+      <article class="card span-4 skill reveal">
+        <div class="skill-head"><span class="skill-ic">🧪</span><h3>DevOps &amp; Testing</h3></div>
+        <div class="chips">
+          <span class="chip">Docker</span>
+          <span class="chip">Git / GitHub</span>
+          <span class="chip">GitHub Actions</span>
+          <span class="chip">Jest + Supertest</span>
+          <span class="chip">Vitest</span>
+          <span class="chip">Playwright</span>
+        </div>
+      </article>
+
+      <article class="card span-4 skill reveal">
+        <div class="skill-head"><span class="skill-ic">💳</span><h3>Payments &amp; Integrations</h3></div>
+        <div class="chips">
+          <span class="chip">Stripe</span>
+          <span class="chip">SSLCommerz</span>
+          <span class="chip">bKash</span>
+          <span class="chip">JWT &amp; RBAC</span>
+          <span class="chip">Nodemailer</span>
+          <span class="chip">Resend</span>
+        </div>
+      </article>
+
+      <article class="card span-4 skill reveal">
+        <div class="skill-head"><span class="skill-ic">🤖</span><h3>AI &amp; Modern Web</h3></div>
+        <div class="chips">
+          <span class="chip">Gemini API</span>
+          <span class="chip">LLM Integration</span>
+          <span class="chip">Computer Vision</span>
+          <span class="chip">PWA</span>
+          <span class="chip">Web Speech API</span>
+          <span class="chip">REST API Design</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">04 — Work</span>
+      <h2 class="section-title">Experience</h2>
+      <p class="section-sub">Real-world work beyond the classroom.</p>
+    </header>
+
+    <div class="bento">
+
+      <article class="card span-12 exp reveal">
+        <div class="exp-top">
+          <div>
+            <h3>Freelance Full-Stack Developer — Saloon Sweden</h3>
+            <div class="org">Self-Employed · Remote · Live at saloon-sweden.vercel.app</div>
+          </div>
+          <span class="badge badge-live"><span class="dot"></span>2026</span>
+        </div>
+        <ul>
+          <li>Built and shipped a production salon website with a 6-step online booking wizard and a full admin dashboard for a Swedish client — Next.js 15, React 19, TypeScript, Express 5 and MySQL/Sequelize.</li>
+          <li>Engineered a concurrency-safe availability engine that respects opening hours, staff schedules, breaks, holidays and time off, prevents double bookings, and revalidates every booking server-side with DST-correct Europe/Stockholm time.</li>
+          <li>Delivered JWT role-based auth (ADMIN / STAFF), a database-backed retrying email queue, live admin booking alerts with Swedish speech synthesis, and Swedish/English GDPR-aware content with data export and erasure.</li>
+        </ul>
+      </article>
+
+      <article class="card span-12 exp reveal">
+        <div class="exp-top">
+          <div>
+            <h3>Freelance Full-Stack Developer — Dhaka Hotel</h3>
+            <div class="org">Self-Employed · Remote · Live at dhakahotel.onrender.com</div>
+          </div>
+          <span class="badge badge-live"><span class="dot"></span>2026</span>
+        </div>
+        <ul>
+          <li>Delivered a bilingual (Bangla / English) restaurant platform in plain PHP 8.2 and MySQL — customer storefront, 18 admin screens, a single-screen POS and an installable PWA, with no framework or build step.</li>
+          <li>Implemented idempotent guest checkout, order tracking by reference, 58 mm / 80 mm / A4 receipt printing, enforced order-status transitions, separate payment and refund records, and CSV reporting.</li>
+          <li>Hardened every write path with PDO prepared statements, CSRF tokens, output escaping, CSP headers, rate-limited admin login and validated image uploads.</li>
+        </ul>
+      </article>
+
+      <article class="card span-12 exp reveal">
+        <div class="exp-top">
+          <div>
+            <h3>Freelance Web Developer — DexxoxxBD</h3>
+            <div class="org">Self-Employed · Remote</div>
+          </div>
+          <span class="badge badge-accent">June 2026 – Present</span>
+        </div>
+        <ul>
+          <li>Designed and developed <a href="https://taraitbd.com" target="_blank" rel="noopener noreferrer"><strong>DexxoxxBD</strong></a> — a full-stack web platform for selling and managing digital subscriptions — for a real client.</li>
+          <li>Independently handled the complete product lifecycle, including frontend development with HTML, CSS &amp; JavaScript, backend development using core PHP, and database design and management with MySQL.</li>
+          <li>Delivered a type-safe, production-ready system with subscription purchase flows, user management, and order tracking.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">05 — Portfolio</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-sub">Selected work showcasing full-stack and AI capabilities.</p>
+    </header>
+
+    <div class="bento">
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Cake Ordering Platform · Freelance</span>
+          <span class="idx">01</span>
+        </div>
+        <h3>CakeFlow</h3>
+        <p>A self-branded booking dashboard for a single-baker cake business. Customers choose a cake, reserve a pickup window and pay a deposit through Stripe, while the baker manages capacity, deposits and cancellations from an admin dashboard — no marketplace, driver tracking or full e-commerce basket. Built as a pnpm monorepo with a Next.js storefront, a modular NestJS API, versioned Prisma migrations and a transactional outbox for reliable email delivery.</p>
+        <div class="chips">
+          <span class="chip">Next.js</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">NestJS</span>
+          <span class="chip">Prisma</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">Stripe</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/IbrahimZihad/my-sweet-desserts" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Salon Booking System · Full Stack</span>
+          <span class="idx">02</span>
+        </div>
+        <h3>Saloon Sweden</h3>
+        <p>A production salon website with a 6-step booking wizard and a complete admin panel, live in production. The availability engine respects opening hours, staff schedules, breaks, holidays and time off, prevents double bookings under concurrency, and revalidates every booking on the server with DST-correct Europe/Stockholm time. Admins get statistics, calendar views and live new-booking alerts, backed by JWT role-based auth, a retrying email queue and Swedish/English GDPR-aware content.</p>
+        <div class="chips">
+          <span class="chip">Next.js</span>
+          <span class="chip">React</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">Sequelize</span>
+        </div>
+        <div class="links">
+          <a href="https://saloon-sweden.vercel.app" target="_blank" rel="noopener noreferrer" class="link">↗ Live Demo</a>
+          <a href="https://github.com/IbrahimZihad/saloon-sweden" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Restaurant, POS &amp; PWA · Freelance</span>
+          <span class="idx">03</span>
+        </div>
+        <h3>Dhaka Hotel</h3>
+        <p>A bilingual (Bangla / English) restaurant system built in plain PHP 8.2 and MySQL — no framework, no bundler. Customers browse the menu, order as guests and track deliveries; the owner runs 18 admin screens, a single-screen POS with receipt printing, payment and refund records, moderation and CSV reports. Ships as an installable PWA with CSRF-protected writes, CSP headers and rate-limited admin login.</p>
+        <div class="chips">
+          <span class="chip">PHP 8.2</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">PWA</span>
+          <span class="chip">HTML/CSS</span>
+        </div>
+        <div class="links">
+          <a href="https://dhakahotel.onrender.com/" target="_blank" rel="noopener noreferrer" class="link">↗ Live Demo</a>
+          <a href="https://github.com/IbrahimZihad/DhakaHotel" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Subscription Platform · Freelance</span>
+          <span class="idx">04</span>
+        </div>
+        <h3>SubscriptionsBD</h3>
+        <p>A full-stack web platform for selling and managing digital subscriptions, built for a real client. Features smooth subscription purchase flows, user management, and order tracking — all with a type-safe architecture end-to-end.</p>
+        <div class="chips">
+          <span class="chip">Next.js</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">MongoDB</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/IbrahimZihad/Subscription-seller" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">AI Learning Companion</span>
+          <span class="idx">05</span>
+        </div>
+        <h3>LittleLingo AI <span class="badge badge-accent" style="margin-left:.35rem;">AI</span></h3>
+        <p>A child-friendly English learning app, live in production on Render. Buddy the bear chats through Gemini with a local fallback when the provider is slow or unavailable, adapting replies to each learner's level across a three-tier curriculum of words, lessons, quizzes, and feelings vocabulary. Caregivers sign in to a single Express service that serves both the browser app and its REST API, with progress held in managed MySQL over TLS-pinned connections.</p>
+        <div class="chips">
+          <span class="chip">Node.js</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">Gemini API</span>
+          <span class="chip">REST API</span>
+          <span class="chip">Web Speech API</span>
+        </div>
+        <div class="links">
+          <a href="https://littlelingo-ai.onrender.com" target="_blank" rel="noopener noreferrer" class="link">↗ Live Demo</a>
+          <a href="https://github.com/IbrahimZihad/littlelingo-ai" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Online Travel Agency</span>
+          <span class="idx">06</span>
+        </div>
+        <h3>Pothik</h3>
+        <p>An OTA platform empowering users to independently plan and customize their dream tour itineraries from end to end — fully self-service, no travel agent required. Responsive and live in production.</p>
+        <div class="chips">
+          <span class="chip">React.js</span>
+          <span class="chip">Vite</span>
+          <span class="chip">Tailwind CSS</span>
+          <span class="chip">Express.js</span>
+          <span class="chip">Node.js</span>
+        </div>
+        <div class="links">
+          <a href="https://pothik-six.vercel.app" target="_blank" rel="noopener noreferrer" class="link">↗ Live Demo</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">AI-Powered System</span>
+          <span class="idx">07</span>
+        </div>
+        <h3>SmartLibrary <span class="badge badge-accent" style="margin-left:.35rem;">AI</span></h3>
+        <p>An autonomous library system inspired by Amazon Go — students borrow and return books without any human interaction. AI tracks students and books in real time, automatically updating carts, removing dropped items instantly, and triggering fines for overdue returns.</p>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">Computer Vision</span>
+          <span class="chip">PHP</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">HTML/CSS</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/IbrahimZihad/SmartLibrary" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Backend System · REST API</span>
+          <span class="idx">08</span>
+        </div>
+        <h3>Inventory Management System</h3>
+        <p>A full-featured inventory and sales backend built with Django REST Framework. Covers a custom user model with profile management, category and product CRUD, invoice creation with automatic stock tracking, and a sales report endpoint — all secured with JWT authentication and role-based permissions distinguishing staff from regular users.</p>
+        <div class="chips">
+          <span class="chip">Django</span>
+          <span class="chip">DRF</span>
+          <span class="chip">Python</span>
+          <span class="chip">JWT Auth</span>
+          <span class="chip">SQLite / PostgreSQL</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/IbrahimZihad/InventoryManagement" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+      <article class="card span-4 proj reveal">
+        <div class="proj-top">
+          <span class="lbl">Product Management · Django</span>
+          <span class="idx">09</span>
+        </div>
+        <h3>ShopManager</h3>
+        <p>A product management web app built with Django and SQLite, featuring full CRUD operations, image upload support for products, form validation, and a clean templated UI. Demonstrates applied Django MVT architecture with migrations and media handling.</p>
+        <div class="chips">
+          <span class="chip">Django</span>
+          <span class="chip">Python</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">HTML/CSS</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/IbrahimZihad/ShopManager" target="_blank" rel="noopener noreferrer" class="link">↗ GitHub</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section id="certifications">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">06 — Learning</span>
+      <h2 class="section-title">Certifications &amp; Courses</h2>
+      <p class="section-sub">Structured programs completed and currently underway.</p>
+    </header>
+
+    <div class="bento">
+      <article class="card span-6 cert reveal">
+        <div class="cert-top">
+          <span class="badge badge-live">✓ Completed · Dec 2025</span>
+          <span class="mono" style="font-size:.68rem;color:var(--muted);">36 hours</span>
+        </div>
+        <h3>Frontend Mastery with JavaScript, React &amp; Next.js (TypeScript)</h3>
+        <div class="issuer">CDIP — United International University</div>
+        <p>An intensive training program covering modern frontend development with JavaScript, React, and Next.js using TypeScript.</p>
+      </article>
+
+      <article class="card span-6 cert reveal">
+        <div class="cert-top">
+          <span class="badge badge-accent">⏳ In Progress</span>
+          <span class="mono" style="font-size:.68rem;color:var(--muted);">Ostad.app</span>
+        </div>
+        <h3>Full Stack Web Development with Python, Django, React &amp; AI</h3>
+        <div class="issuer">Ostad.app</div>
+        <p>A comprehensive full-stack course covering Python, Django, React, and AI integration for building production-grade web applications.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <div class="wrap">
+    <header class="section-head reveal">
+      <span class="kicker">07 — Recognition</span>
+      <h2 class="section-title">Academic Achievements</h2>
+      <p class="section-sub">Milestones earned from school through university.</p>
+    </header>
+
+    <div class="bento">
+      <article class="card span-4 achv reveal">
+        <div class="num">3.93</div>
+        <h3>Top University CGPA</h3>
+        <p>Graduated with a CGPA of 3.93 out of 4.00 in the BSc Computer Science &amp; Engineering program at United International University, majoring in Software Engineering.</p>
+        <span class="badge badge-live" style="align-self:flex-start;margin-top:.35rem;">CGPA 3.93 / 4.00</span>
+      </article>
+
+      <article class="card span-4 achv reveal">
+        <div class="num">5.00</div>
+        <h3>Academic Excellence — HSC</h3>
+        <p>Achieved a perfect GPA of 5.00 / 5.00 in the Higher Secondary Certificate examination (2020) from Birshrestha Noor Muhammad Public College.</p>
+        <span class="badge badge-live" style="align-self:flex-start;margin-top:.35rem;">GPA 5.00 / 5.00</span>
+      </article>
+
+      <article class="card span-4 achv reveal">
+        <div class="num">5.00</div>
+        <h3>Academic Excellence — SSC</h3>
+        <p>Achieved a perfect GPA of 5.00 / 5.00 in the Secondary School Certificate examination (2018) from Ghatail Cantonment Public School and College.</p>
+        <span class="badge badge-live" style="align-self:flex-start;margin-top:.35rem;">GPA 5.00 / 5.00</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="bento">
+
+      <article class="card span-5 contact-left reveal">
+        <span class="kicker">08 — Contact</span>
+        <h2 class="section-title">Let's Connect</h2>
+        <p>I'm open to new opportunities, collaborations, and conversations. Whether you have a project in mind or just want to say hello — feel free to reach out.</p>
+        <div class="socials">
+          <a href="https://github.com/IbrahimZihad" target="_blank" rel="noopener noreferrer" class="social">🐙 GitHub</a>
+          <a href="https://linkedin.com/in/ibrahim-zihad-637525317" target="_blank" rel="noopener noreferrer" class="social">💼 LinkedIn</a>
+          <a href="https://facebook.com/ibrahimzihad.zihad" target="_blank" rel="noopener noreferrer" class="social">📘 Facebook</a>
+          <a href="Ibrahim%20Zihad%20Resume.pdf" download class="social primary">↓ Download CV</a>
+        </div>
+      </article>
+
+      <article class="card span-7 reveal">
+        <div class="tiles">
+          <div class="tile">
+            <div class="ic">✉️</div>
+            <div>
+              <div class="k">Email</div>
+              <div class="v"><a href="mailto:ibrahimzihad5@gmail.com">ibrahimzihad5@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="ic">📱</div>
+            <div>
+              <div class="k">Phone</div>
+              <div class="v"><a href="tel:+8801885434861">+880 1885434861</a></div>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="ic">📍</div>
+            <div>
+              <div class="k">Location</div>
+              <div class="v">Dhaka, Bangladesh</div>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="ic">🎓</div>
+            <div>
+              <div class="k">University</div>
+              <div class="v">United International University</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 <b>Md. Ibrahim Zihad</b> · built with HTML, CSS &amp; JavaScript</span>
+    <span>Dhaka, BD · <b>Open to work</b></span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const progress = document.getElementById('scrollProgress');
+  const navAnchors = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const pageSections = Array.from(document.querySelectorAll('section[id]'));
+
+  const updateActiveNav = () => {
+    const probe = window.scrollY + window.innerHeight * 0.35;
+    let current = '';
+    pageSections.forEach((s) => {
+      if (s.offsetTop <= probe) current = s.id;
+    });
+    navAnchors.forEach((a) => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  };
+
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    progress.style.width = (max > 0 ? (doc.scrollTop / max) * 100 : 0) + '%';
+    updateActiveNav();
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  const closeMenu = () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+
+  hamburger.addEventListener('click', () => {
+    const open = !mobileMenu.classList.contains('open');
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  document.querySelectorAll('.mm-link').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 60 * (entry.target.dataset.delay || 0));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach((el, i) => {
+    el.dataset.delay = i % 4;
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+<style>.reveal{opacity:1!important;transform:none!important;}</style></body>
+</html>
